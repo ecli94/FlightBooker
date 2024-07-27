@@ -2,45 +2,41 @@ package dbcontext
 
 import (
 	"context"
-	"fmt"
-	"log"
-	"os"
+	"time"
 
-	// "github.com/ecli94/FlightBooker/backend/configs/configs"
-	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func initClient() *mongo.Client {
-	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found")
-	}
-
-	uri := os.Getenv("MONGODB_URI")
-	if uri == "" {
-		log.Fatal("Set your 'MONGODB_URI' environment variable. " +
-			"See: www.mongodb.com/docs/drivers/go/current/usage-examples/#environment-variable")
-	}
-	client, err := mongo.Connect(context.TODO(), options.Client().
-		ApplyURI(uri))
+func connect(uri string) (*mongo.Client, context.Context, context.CancelFunc, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
 		panic(err)
 	}
 
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Connected to MongoDB!")
-	return client
+	return client, ctx, cancel, err
 }
 
-func disconnectClient(client mongo.Client) {
-	if err := client.Disconnect(context.TODO()); err != nil {
-		panic(err)
-	} else {
-		fmt.Println("Disconnected from MongoDB!")
+func disconnect(client *mongo.Client, ctx context.Context, cancel context.CancelFunc) {
+	defer cancel()
+
+	defer func() {
+		if err := client.Disconnect(ctx); err != nil {
+			panic(err)
+		}
+	}()
+}
+
+func ping(client *mongo.Client, ctx context.Context) error {
+
+	// mongo.Client has Ping to ping mongoDB, deadline of
+	// the Ping method will be determined by cxt
+	// Ping method return error if any occurred, then
+	// the error can be handled.
+	if err := client.Ping(ctx, readpref.Primary()); err != nil {
+		return err
 	}
+	return nil
 }

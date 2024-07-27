@@ -1,0 +1,2 @@
+dsn: "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority"
+jwt_signing_key: ""
