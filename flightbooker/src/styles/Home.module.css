@@ -1,0 +1,266 @@
+.mainColumn {
+  margin: auto;
+  border-radius: 25px;
+  background-color: white;
+  width: 90%;
+  height: 70vh;
+}
+
+/* Left column */
+.leftColumn {   
+  float: left;
+  width: 40%;
+  background-color: #f1f1f1;
+}
+
+/* Right column */
+.rightColumn {
+  float: left;
+  width: 40%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* center column */
+.centerColumn {
+  width: 1090px;
+  height: 50vh;
+  background-color: blue;
+  border: 3px solid green;
+  border-radius: 25px;
+  margin: auto;
+}
+
+
+
+/* Fake image */
+.fakeImg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  text-align: left;
+  background-color: grey;
+  border-radius: 25px;
+  position:relative;
+  left: calc((1090px-800px)/2);
+  bottom: 80px;
+  height: 300px;
+  width: 800px;
+  display:flex;
+}
+
+.card label{
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 25px;
+    background-color: grey;
+}
+
+.cardHeading {
+    font-weight:bold;
+    font-size:large;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+
+
+/* Trip type selector */
+
+.bookButton {
+    width: 350px;
+    border-radius: 25px;
+    height: 68px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.bookRow {
+    display: grid;
+    padding: 10px;
+    justify-content: start;
+    grid-template-columns: 350px 350px 350px;
+    grid-gap: 10px 10px;
+}
+
+
+
+.bookType {
+    grid-column: 1/2;
+}
+
+.bookFrom {
+    grid-column: 2/3;
+}
+
+.bookTo{
+    grid-column: 3/4;
+}
+
+.bookPassengers {
+    grid-column: 1/2;
+}
+
+.bookDateOneWay {
+    grid-column: 2/4;
+}
+
+.bookDateOneWay button {
+    width: calc(350px * 2 + 10px);
+}
+
+.tripTypeCard {
+    grid-column: 1/4;
+}
+
+.passengerRow{
+    display: grid;
+    padding: 10px;
+    justify-content: start;
+    grid-template-columns: 350px 50px 50px 50px;
+}
+
+.passengerColumn {
+    grid-column: 1/2;
+}
+
+.addPassengerColumn {
+    grid-column: 2/3;
+}
+
+.passengerCountColumn {
+    grid-column: 3/4
+}
+
+
+.removePassenger {
+    grid-column: 4/5
+}
+
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure overlay is on top */
+}
+
+.citySelectVerticalMenu {
+    width: 100%;
+}
+
+.citySelectVerticalMenu select{
+  text-align: left;
+  font-size: 16px;
+  background-color: grey;
+  border-radius: 25px;
+  position:relative;
+  left: calc((1090px-800px)/2);
+  height: 83%;
+  width: 800px;
+}
+
+.citySelectVerticalMenu option{
+    border-radius: 25px;
+    padding: 12px;
+}
+
+.passengerSelectVerticalMenu {
+    width: 100%;
+}
+
+.passengerSelectVerticalMenu select{
+  text-align: left;
+  font-size: 16px;
+  background-color: grey;
+  border-radius: 25px;
+  position:relative;
+  left: calc((1090px-800px)/2);
+  height: 83%;
+  width: 600px;
+}
+
+.passengerSelectVerticalMenu option{
+    border-radius: 25px;
+    padding: 12px;
+}
+
+/* Add a card effect for articles */
+.passengerCard {
+  text-align: left;
+  background-color: grey;
+  border-radius: 25px;
+  position:relative;
+  left: calc((1090px-800px)/2);
+  bottom: 80px;
+  height: 500px;
+  width: 800px;
+  display:flex;
+}
+
+.passengerCard label{
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 25px;
+    background-color: grey;
+}
+
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+    }
+    .citySelectVerticalMenu select {
+        width: 100%
+    }
+    .passengerSelectVerticalMenu select {
+        width: 100%
+    }
+
+}
+
+@media screen and (max-width: 1100px) {
+  .centerColumn{   
+    width: 100%;
+  }
+  .bookRow{   
+    width: 100%;
+    grid-column-gap: 5%;
+    grid-template-columns: 30% 30% 30%;
+  }
+  .bookType, .bookFrom, .bookTo{   
+    grid-column: 1/-1;
+    padding: 3px;
+  }
+}
