@@ -9,13 +9,11 @@ import NoPage from './pages/NoPage';
 import Language from './pages/Language';
 import CustomerService from './pages/CustomerService';
 import "./App.css";
-import { DataProvider } from './components/Home/HomeBookingCard';
 
 const App: React.FC = () => {
     return (
         <BrowserRouter>
             <TopOfPage />
-            <DataProvider>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/book" element={<Book />} />
@@ -24,7 +22,6 @@ const App: React.FC = () => {
                 <Route path="/customerservice" element={<CustomerService />} />
                 <Route path="/*" element={<NoPage />} />
             </Routes>
-            </DataProvider>
             <BottomOfPage />
         </BrowserRouter>
     );

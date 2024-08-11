@@ -1,13 +1,14 @@
 import { useContext } from "react";
+import { HomeBookingCardContext} from "../providers/HomeBookingCardContextProvider";
 
 
 // Generic hook to use either context
-const useContextHandler = <T>(context: React.Context<T | undefined>): T => {
-    const ctx = useContext(context);
-    if (!ctx) {
-        throw new Error('useHomeBookingHandler must be used within a DataProvider');
+const useHomeBookingCardContextHandler = () => {
+    const ctx = useContext(HomeBookingCardContext);
+    if (ctx === undefined) {
+        throw new Error('useContextHandler must be used within a DataProvider');
     }
     return ctx;
 }
 
-export default useContextHandler;
+export default useHomeBookingCardContextHandler;

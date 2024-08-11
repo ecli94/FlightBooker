@@ -1,4 +1,5 @@
-import { createContext, Dispatch, ReactNode, useReducer } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useReducer, useState } from "react";
+import {tripTypes, locations, passengers, classes} from "../components/Home/Constants"
 
 interface StateOperations {
     id: number;
@@ -28,7 +29,6 @@ export interface Passenger extends StateOperations {
 
 export interface Class extends StateOperations {
     name?: string;
-    
 }
 
 interface TypeHandlerResponse {
@@ -56,12 +56,36 @@ interface ClassHandlerResponse{
     classDispatch: Dispatch<Action>;
 }
 
+interface TypeCardVisibleState{
+    isTypeCardVisible: boolean;
+    setIsTypeCardVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+interface FromCardVisibleState {
+    isFromCardVisible: boolean;
+    setIsFromCardVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+interface ToCardVisibleState {
+    isToCardVisible: boolean;
+    setIsToCardVisible: Dispatch<SetStateAction<boolean>>;
+}
+
+interface PassengerCardVisibleState {
+    isPassengerCardVisible: boolean;
+    setIsPassengerCardVisible: Dispatch<SetStateAction<boolean>>;
+}
+
 export interface HomeBookingCardContextProps extends
 TypeHandlerResponse,
 LocationToHandlerResponse,
 LocationFromHandlerResponse,
 PassengerHandlerResponse,
-ClassHandlerResponse {}
+ClassHandlerResponse,
+TypeCardVisibleState,
+FromCardVisibleState,
+ToCardVisibleState,
+PassengerCardVisibleState {}
 
 const HomeBookingCardContext = createContext<HomeBookingCardContextProps | undefined>(undefined);
 
@@ -100,19 +124,18 @@ const reducer = (state: State[], action: Action) => {
     }
 };
 
-interface HomeBookingCardContextProviderProps extends
-TripType,
-Location,
-Passenger,
-Class {}
-
 // Create a provider component
-const HomeBookingCardContextProvider: React.FC<{ children: ReactNode, data: HomeBookingCardContextProviderProps[]}> = ({ children , data}) => {
-    const [types, typesDispatch] = useReducer(reducer, data);
-    const [locationTo, locationsToDispatch] = useReducer(reducer, data)
-    const [locationFrom, locationsFromDispatch] = useReducer(reducer, data)
-    const [travelers, passengerDispatch] = useReducer(reducer, data)
-    const [ticketClasses, classDispatch] = useReducer(reducer, data)
+const HomeBookingCardContextProvider: React.FC<{ children: ReactNode}> = ({ children}) => {
+    const [types, typesDispatch] = useReducer(reducer, tripTypes);
+    const [locationTo, locationsToDispatch] = useReducer(reducer, locations)
+    const [locationFrom, locationsFromDispatch] = useReducer(reducer, locations)
+    const [travelers, passengerDispatch] = useReducer(reducer, passengers)
+    const [ticketClasses, classDispatch] = useReducer(reducer, classes)
+    const [isTypeCardVisible, setIsTypeCardVisible] = useState(false);
+    const [isFromCardVisible, setIsFromCardVisible] = useState(false);
+    const [isToCardVisible, setIsToCardVisible] = useState(false);
+    const [isPassengerCardVisible, setIsPassengerCardVisible] = useState(false);
+
 
     const values = {
         types,
@@ -124,7 +147,15 @@ const HomeBookingCardContextProvider: React.FC<{ children: ReactNode, data: Home
         travelers,
         passengerDispatch,
         ticketClasses,
-        classDispatch
+        classDispatch,
+        isTypeCardVisible,
+        setIsTypeCardVisible,
+        isFromCardVisible,
+        setIsFromCardVisible,
+        isToCardVisible,
+        setIsToCardVisible,
+        isPassengerCardVisible,
+        setIsPassengerCardVisible
     }
 
     return (
