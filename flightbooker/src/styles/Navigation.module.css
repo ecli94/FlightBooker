@@ -1,6 +1,6 @@
 .topNav ul {
   list-style-type: none;
-  top:0;
+  top: 0;
   position: fixed;
   width: 100%;
   margin: 0;
@@ -30,14 +30,14 @@
   .topNav li {
     width: 100%;
   }
-  .topNav li a{
+  .topNav li a {
     padding: 5px 10px;
   }
 }
 
 .bottomNav ul {
   list-style-type: none;
-  bottom:0;
+  bottom: 0;
   position: fixed;
   width: 100%;
   margin: 0;
@@ -62,7 +62,6 @@
 .bottomNav li a:hover {
   background-color: #111;
 }
-
 
 @media screen and (max-width: 700px) {
   .bottomNav li {

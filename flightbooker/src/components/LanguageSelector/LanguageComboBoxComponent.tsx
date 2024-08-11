@@ -1,9 +1,7 @@
 import React from "react";
 
 const LanguageComboBoxComponent: React.FC = () => {
-    return (
-        null
-    )
-}
+  return null;
+};
 
-export default LanguageComboBoxComponent
+export default LanguageComboBoxComponent;
