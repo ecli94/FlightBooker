@@ -1,4 +1,4 @@
-module FlightBooker/backend/src/flightbooker
+module github.com/ecli94/FlightBooker
 
 go 1.22.4
 
