@@ -1,7 +1,7 @@
-import styles from "../../styles/Home.module.css";
-import { Dispatch, forwardRef, SetStateAction } from "react";
-import SelectedTypes from "./SelectedTypes";
-import useHomeBookingCardContextHandler from "../../hooks/useHomeBookingCard";
+import styles from '../../styles/Home.module.css';
+import { Dispatch, forwardRef, SetStateAction } from 'react';
+import SelectedTypes from './SelectedTypes';
+import useHomeBookingCardContextHandler from '../../hooks/useHomeBookingCard';
 
 interface TypeCardProps {
   closeCard: () => void;
@@ -15,12 +15,7 @@ const TypeCard = forwardRef<HTMLDivElement, TypeCardProps>((props, ref) => {
   };
   return (
     <div className={styles.overlay} onClick={props.closeCard}>
-      <div
-        ref={ref}
-        id="tripType"
-        className={styles.card}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div ref={ref} id="tripType" className={styles.card} onClick={(e) => e.stopPropagation()}>
         <SelectedTypes onChangeCallback={onChangeType} />
       </div>
     </div>

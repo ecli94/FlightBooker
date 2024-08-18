@@ -1,6 +1,6 @@
-import SelectDestination from "./SelectedDestination";
-import styles from "../../styles/Home.module.css";
-import { Dispatch, forwardRef, SetStateAction } from "react";
+import SelectDestination from './SelectedDestination';
+import styles from '../../styles/Home.module.css';
+import { Dispatch, forwardRef, SetStateAction } from 'react';
 
 interface DestinationFromCardProps {
   closeCard: () => void;
@@ -10,18 +10,10 @@ interface DestinationFromCardProps {
   setFrom: Dispatch<SetStateAction<number | undefined>>;
 }
 
-const DestinationFromCard = forwardRef<
-  HTMLDivElement,
-  DestinationFromCardProps
->((props, ref) => {
+const DestinationFromCard = forwardRef<HTMLDivElement, DestinationFromCardProps>((props, ref) => {
   return (
     <div className={styles.overlay} onClick={props.closeCard}>
-      <div
-        ref={ref}
-        id="from"
-        className={styles.card}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div ref={ref} id="from" className={styles.card} onClick={(e) => e.stopPropagation()}>
         <SelectDestination
           closeCallback={props.closeCard}
           direction="Departure locations"

@@ -1,5 +1,5 @@
-import React from "react";
-import TopComponent from "../components/MainNavigation/TopComponent";
+import React from 'react';
+import TopComponent from '../components/MainNavigation/TopComponent';
 
 const TopOfPage: React.FC = () => {
   return <TopComponent />;

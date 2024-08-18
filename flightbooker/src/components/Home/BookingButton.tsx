@@ -1,5 +1,5 @@
-import { MouseEventHandler } from "react";
-import styles from "../../styles/Home.module.css";
+import { MouseEventHandler } from 'react';
+import styles from '../../styles/Home.module.css';
 
 interface BookingButtonProps {
   type: string;
@@ -7,19 +7,15 @@ interface BookingButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const BookingButton: React.FC<BookingButtonProps> = ({
-  type,
-  value,
-  onClick,
-}) => {
+const BookingButton: React.FC<BookingButtonProps> = ({ type, value, onClick }) => {
   return (
     <div>
       <button className={styles.bookButton} onClick={onClick}>
         <div>
-          <span style={{ fontWeight: "lighter" }}> {type} </span>
+          <span style={{ fontWeight: 'lighter' }}> {type} </span>
         </div>
         <div>
-          <span style={{ fontWeight: "bolder" }}> {value} </span>
+          <span style={{ fontWeight: 'bolder' }}> {value} </span>
         </div>
       </button>
     </div>
