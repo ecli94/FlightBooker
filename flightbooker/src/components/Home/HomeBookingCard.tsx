@@ -58,7 +58,7 @@ const HomeBookingCard: React.FC = () => {
       locationsToDispatch({ type: "INCOMPLETE", id: toId });
       setTo(undefined);
     }
-  }, [locationTo]);
+  }, [locationFrom]);
 
   useEffect(() => {
     const toId =

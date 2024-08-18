@@ -26,31 +26,18 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
     switch (props.direction) {
       case "Departure locations":
         locationsFromDispatch({ type: "COMPLETE", id: id });
-        console.log(locationFrom);
         props.closeCallback();
         props.setFrom(locationFrom.find((loc) => loc.id == id)?.id);
-        if (props.to == props.from) {
-          console.log("from");
-          locationsToDispatch({ type: "INCOMPLETE", id: id });
-          props.setTo(undefined);
-        }
         break;
       case "Destinations":
         locationsToDispatch({ type: "COMPLETE", id: id });
         props.closeCallback();
         props.setTo(locationTo.find((loc) => loc.id == id)?.id);
-        // handle same location as from
-        if (props.to == props.from) {
-          console.log("to");
-          locationsFromDispatch({ type: "INCOMPLETE", id: id });
-          props.setFrom(undefined);
-        }
         break;
       default:
         throw new TypeError("Incorrect direction was provided");
     }
   };
-  console.log(locationFrom);
 
   return (
     <>
