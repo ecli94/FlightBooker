@@ -1,5 +1,5 @@
 import React from "react";
-import HomeBookingCard from "../components/Home/HomeBookingCardv2";
+import HomeBookingCard from "../components/Home/HomeBookingCardv3";
 import { HomeBookingCardContextProvider } from "../providers/HomeBookingCardContextProvider";
 
 const Home: React.FC = () => {

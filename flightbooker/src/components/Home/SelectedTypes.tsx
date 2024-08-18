@@ -1,8 +1,11 @@
 import useContextHandler from "../../hooks/useHomeBookingCard";
 import styles from "../../styles/Home.module.css";
 
-const SelectedTypes = () => {
-  const { types, typesDispatch, setIsTypeCardVisible } = useContextHandler();
+interface SelectedTypesProps {
+  onChangeCallback: (type: string, id: number) => void;
+}
+const SelectedTypes = (props: SelectedTypesProps) => {
+  const { types } = useContextHandler();
   return (
     <>
       <div>
@@ -13,10 +16,7 @@ const SelectedTypes = () => {
               <input
                 type="checkbox"
                 checked={t.complete}
-                onChange={() => {
-                  typesDispatch({ type: "COMPLETE", id: t.id });
-                  setIsTypeCardVisible(false);
-                }}
+                onChange={() => props.onChangeCallback("COMPLETE", t.id)}
               />
               {t.name}
             </label>

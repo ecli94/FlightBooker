@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import useContextHandler from "../../hooks/useHomeBookingCard";
-import SelectedTypes from "./SelectedTypes";
-import SelectDestination from "./SelectedDestination";
-import SelectPassengers from "./SelectPassengers";
 import BookingButton from "./BookingButton";
+import TypeCard from "./TypeCard";
+import DestinationFromCard from "./DestinationFromCard";
+import DestinationToCard from "./DestinationToCard";
+import PassengerCard from "./PassengerCard";
 
 const HomeBookingCard: React.FC = () => {
   const typeCardRef = useRef<HTMLDivElement | null>(null);
@@ -90,60 +91,46 @@ const HomeBookingCard: React.FC = () => {
   const closePassengerCard = () => {
     setIsPassengerCardVisible(false);
   };
+  console.log(locationTo);
 
   return (
     <div className={styles.centerColumn}>
       <div className={styles.bookRow}>
         {isTypeCardVisible && (
-          <div className={styles.overlay} onClick={closeTypeCard}>
-            <div
-              ref={typeCardRef}
-              id="tripType"
-              className={styles.card}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <SelectedTypes />
-            </div>
-          </div>
+          <TypeCard
+            closeCard={closeTypeCard}
+            setIsTypeCardVisible={setIsTypeCardVisible}
+            ref={typeCardRef}
+          />
         )}
 
         {isFromCardVisible && (
-          <div className={styles.overlay} onClick={closeFromCard}>
-            <div
-              ref={fromCardRef}
-              id="from"
-              className={styles.card}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <SelectDestination direction="Departure locations" />
-            </div>
-          </div>
+          <DestinationFromCard
+            closeCard={closeFromCard}
+            to={to}
+            from={from}
+            setTo={setTo}
+            setFrom={setFrom}
+            ref={fromCardRef}
+          />
         )}
 
         {isToCardVisible && (
-          <div className={styles.overlay} onClick={closeToCard}>
-            <div
-              ref={toCardRef}
-              id="to"
-              className={styles.card}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <SelectDestination direction="Destinations" />
-            </div>
-          </div>
+          <DestinationToCard
+            closeCard={closeToCard}
+            to={to}
+            from={from}
+            setTo={setTo}
+            setFrom={setFrom}
+            ref={toCardRef}
+          />
         )}
 
         {isPassengerCardVisible && (
-          <div className={styles.overlay} onClick={closePassengerCard}>
-            <div
-              ref={passengerCardRef}
-              id="to"
-              className={styles.passengerCard}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <SelectPassengers />
-            </div>
-          </div>
+          <PassengerCard
+            closeCard={closePassengerCard}
+            ref={passengerCardRef}
+          />
         )}
 
         <div className={styles.bookType}>

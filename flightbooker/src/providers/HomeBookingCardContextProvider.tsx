@@ -1,11 +1,4 @@
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, Dispatch, ReactNode, useReducer } from "react";
 import {
   tripTypes,
   locations,
@@ -67,36 +60,12 @@ interface ClassHandlerResponse {
   classDispatch: Dispatch<Action>;
 }
 
-interface TypeCardVisibleState {
-  isTypeCardVisible: boolean;
-  setIsTypeCardVisible: Dispatch<SetStateAction<boolean>>;
-}
-
-interface FromCardVisibleState {
-  isFromCardVisible: boolean;
-  setIsFromCardVisible: Dispatch<SetStateAction<boolean>>;
-}
-
-interface ToCardVisibleState {
-  isToCardVisible: boolean;
-  setIsToCardVisible: Dispatch<SetStateAction<boolean>>;
-}
-
-interface PassengerCardVisibleState {
-  isPassengerCardVisible: boolean;
-  setIsPassengerCardVisible: Dispatch<SetStateAction<boolean>>;
-}
-
 export interface HomeBookingCardContextProps
   extends TypeHandlerResponse,
     LocationToHandlerResponse,
     LocationFromHandlerResponse,
     PassengerHandlerResponse,
-    ClassHandlerResponse,
-    TypeCardVisibleState,
-    FromCardVisibleState,
-    ToCardVisibleState,
-    PassengerCardVisibleState {}
+    ClassHandlerResponse {}
 
 const HomeBookingCardContext = createContext<
   HomeBookingCardContextProps | undefined
@@ -113,6 +82,10 @@ const reducer = (state: State[], action: Action) => {
         } else {
           return { ...type, complete: false };
         }
+      });
+    case "INCOMPLETE":
+      return state.map((type) => {
+        return { ...type, complete: false };
       });
     case "ADD-PASSENGER":
       return state.map((type) => {
@@ -145,10 +118,6 @@ const HomeBookingCardContextProvider: React.FC<{ children: ReactNode }> = ({
   const [locationFrom, locationsFromDispatch] = useReducer(reducer, locations);
   const [travelers, passengerDispatch] = useReducer(reducer, passengers);
   const [ticketClasses, classDispatch] = useReducer(reducer, classes);
-  const [isTypeCardVisible, setIsTypeCardVisible] = useState(false);
-  const [isFromCardVisible, setIsFromCardVisible] = useState(false);
-  const [isToCardVisible, setIsToCardVisible] = useState(false);
-  const [isPassengerCardVisible, setIsPassengerCardVisible] = useState(false);
 
   const values = {
     types,
@@ -161,14 +130,6 @@ const HomeBookingCardContextProvider: React.FC<{ children: ReactNode }> = ({
     passengerDispatch,
     ticketClasses,
     classDispatch,
-    isTypeCardVisible,
-    setIsTypeCardVisible,
-    isFromCardVisible,
-    setIsFromCardVisible,
-    isToCardVisible,
-    setIsToCardVisible,
-    isPassengerCardVisible,
-    setIsPassengerCardVisible,
   };
 
   return (
