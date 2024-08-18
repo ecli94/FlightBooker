@@ -1,14 +1,14 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import TopOfPage from "./pages/TopOfPage";
-import BottomOfPage from "./pages/BottomOfPage";
-import Home from "./pages/Home";
-import Book from "./pages/Book";
-import Login from "./pages/Login";
-import NoPage from "./pages/NoPage";
-import Language from "./pages/Language";
-import CustomerService from "./pages/CustomerService";
-import "./App.css";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import TopOfPage from './pages/TopOfPage';
+import BottomOfPage from './pages/BottomOfPage';
+import Home from './pages/Home';
+import Book from './pages/Book';
+import Login from './pages/Login';
+import NoPage from './pages/NoPage';
+import Language from './pages/Language';
+import CustomerService from './pages/CustomerService';
+import './App.css';
 
 const App: React.FC = () => {
   return (

@@ -136,43 +136,18 @@
 
 .passengerColumn {
   grid-column: 1/2;
-  align-content: center;
 }
 
 .addPassengerColumn {
-  display: flex;
-  justify-content: flex-start;
-  justify-items: center;
   grid-column: 4/5;
 }
 
 .passengerCountColumn {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
   grid-column: 3/4;
 }
 
 .removePassengerColumn {
-  display: flex;
-  justify-content: flex-end;
-  justify-items: center;
   grid-column: 2/3;
-}
-
-.removePassengerButton {
-  width: 50px;
-  height: 100%;
-}
-
-.addPassengerButton {
-  width: 50px;
-  height: 100%;
-}
-
-.countPassengerLabel {
-  align-content: start;
-  height: 100%;
 }
 
 .overlay {
@@ -267,6 +242,12 @@
   }
   .passengerCard {
     width: 100%;
+  }
+  .passengerRow {
+    display: grid;
+    padding: 10px;
+    justify-content: start;
+    grid-template-columns: 65% 50px 50px 50px;
   }
 }
 

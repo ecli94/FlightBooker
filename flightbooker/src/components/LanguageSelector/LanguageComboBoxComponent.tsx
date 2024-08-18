@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const LanguageComboBoxComponent: React.FC = () => {
   return null;

@@ -1,10 +1,5 @@
-import { createContext, Dispatch, ReactNode, useReducer } from "react";
-import {
-  tripTypes,
-  locations,
-  passengers,
-  classes,
-} from "../components/Home/Constants";
+import { createContext, Dispatch, ReactNode, useReducer } from 'react';
+import { tripTypes, locations, passengers, classes } from '../components/Home/Constants';
 
 interface StateOperations {
   id: number;
@@ -67,15 +62,13 @@ export interface HomeBookingCardContextProps
     PassengerHandlerResponse,
     ClassHandlerResponse {}
 
-const HomeBookingCardContext = createContext<
-  HomeBookingCardContextProps | undefined
->(undefined);
+const HomeBookingCardContext = createContext<HomeBookingCardContextProps | undefined>(undefined);
 
 interface State extends Location, TripType, Passenger {}
 
 const reducer = (state: State[], action: Action) => {
   switch (action.type) {
-    case "COMPLETE":
+    case 'COMPLETE':
       return state.map((type) => {
         if (type.id === action.id) {
           return { ...type, complete: true };
@@ -83,11 +76,11 @@ const reducer = (state: State[], action: Action) => {
           return { ...type, complete: false };
         }
       });
-    case "INCOMPLETE":
+    case 'INCOMPLETE':
       return state.map((type) => {
         return { ...type, complete: false };
       });
-    case "ADD-PASSENGER":
+    case 'ADD-PASSENGER':
       return state.map((type) => {
         if (type.id === action.id) {
           return { ...type, count: type.count!++ };
@@ -95,10 +88,14 @@ const reducer = (state: State[], action: Action) => {
           return type;
         }
       });
-    case "REMOVE-PASSENGER":
+    case 'REMOVE-PASSENGER':
       return state.map((type) => {
         if (type.id === action.id) {
-          const count = type.count! > 0 ? type.count!-- : 0;
+          if (type.id != 1) {
+            const count = type.count! > 0 ? type.count!-- : 0;
+            return { ...type, count: count };
+          }
+          const count = type.count! > 1 ? type.count!-- : 1;
           return { ...type, count: count };
         } else {
           return type;
@@ -110,9 +107,7 @@ const reducer = (state: State[], action: Action) => {
 };
 
 // Create a provider component
-const HomeBookingCardContextProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+const HomeBookingCardContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [types, typesDispatch] = useReducer(reducer, tripTypes);
   const [locationTo, locationsToDispatch] = useReducer(reducer, locations);
   const [locationFrom, locationsFromDispatch] = useReducer(reducer, locations);
@@ -132,11 +127,7 @@ const HomeBookingCardContextProvider: React.FC<{ children: ReactNode }> = ({
     classDispatch,
   };
 
-  return (
-    <HomeBookingCardContext.Provider value={values}>
-      {children}
-    </HomeBookingCardContext.Provider>
-  );
+  return <HomeBookingCardContext.Provider value={values}>{children}</HomeBookingCardContext.Provider>;
 };
 
 export { HomeBookingCardContext, HomeBookingCardContextProvider };
