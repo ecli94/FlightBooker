@@ -1,8 +1,11 @@
 package entity
 
+import "time"
+
 type Airline struct {
-	Entity
-	Name string `json:"name"`
-	IATA string `json:"iata"`
-	ICAO string `json:"icao"`
+	Name       string    `json:"name"`
+	IATA       string    `json:"iata"`
+	ICAO       string    `json:"icao"`
+	CreatedAt  time.Time `json:"created_at"`
+	ModifiedAt time.Time `json:"modified_at"`
 }

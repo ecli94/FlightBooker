@@ -2,50 +2,148 @@ package airline
 
 import (
 	"context"
+	"reflect"
 
-	"github.com/ecli94/FlightBooker/internal/dbcontext"
+	"github.com/ecli94/FlightBooker/cmd/utils"
 	"github.com/ecli94/FlightBooker/internal/entity"
-	"github.com/ecli94/FlightBooker/pkg/log"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Repository interface {
-	Get(ctx context.Context, id string) (*entity.Airline, error)
+	Get(ctx context.Context, id primitive.ObjectID) (*entity.Airline, error)
 	Query(ctx context.Context, query string) ([]*entity.Airline, error)
 	GetAll(ctx context.Context) ([]*entity.Airline, error)
-	Create(ctx context.Context, airline entity.Airline) error
-	Update(ctx context.Context, airline entity.Airline) error
-	Delete(ctx context.Context, id string) error
+	Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error)
+	Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error)
+	Delete(ctx context.Context, id primitive.ObjectID) (int64, error)
 }
 
 type repository struct {
-	store  *dbcontext.MongoDataStore
-	logger log.Logger
+	client *mongo.Client
+	config *utils.Configuration
 }
 
-func NewRepository(store *dbcontext.MongoDataStore, logger log.Logger) Repository {
-	return &repository{store: store, logger: logger}
+func NewRepository(client *mongo.Client, config *utils.Configuration) Repository {
+	return &repository{client: client, config: config}
 }
 
-func (r *repository) Get(ctx context.Context, id string) (*entity.Airline, error) {
-
+func (r *repository) Get(ctx context.Context, id primitive.ObjectID) (*entity.Airline, error) {
+	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
+	filter := bson.D{primitive.E{Key: "_id", Value: id}}
+	var airline *entity.Airline
+	collection.FindOne(ctx, filter).Decode(&airline)
+	return airline, nil
 }
 
 func (r *repository) Query(ctx context.Context, query string) ([]*entity.Airline, error) {
+	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
+	cursor, err := collection.Find(ctx, bson.D{{Key: "name",
+		Value: bson.D{{Key: "$regex", Value: "^" + query}}}})
+	if err != nil {
+		return nil, err
+	}
+
+	var airlines []*entity.Airline
+	for cursor.Next(ctx) {
+		var elem entity.Airline
+		if err := cursor.Decode(&elem); err != nil {
+			return nil, err
+		}
+
+		airlines = append(airlines, &elem)
+	}
+
+	cursor.Close(ctx)
+	return airlines, nil
 }
 
 func (r *repository) GetAll(ctx context.Context) ([]*entity.Airline, error) {
+	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
+	cursor, err := collection.Find(ctx, bson.D{})
+	if err != nil {
+		return nil, err
+	}
+
+	var airlines []*entity.Airline
+	for cursor.Next(ctx) {
+		var elem entity.Airline
+		if err := cursor.Decode(&elem); err != nil {
+			return nil, err
+		}
+
+		airlines = append(airlines, &elem)
+	}
+
+	cursor.Close(ctx)
+	return airlines, nil
 }
 
-func (r *repository) Create(ctx context.Context, airline entity.Airline) error {
+func (r *repository) Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error) {
+	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
+	insertResult, err := collection.InsertOne(ctx, airline)
+
+	if err != mongo.ErrNilCursor {
+		return primitive.NilObjectID, err
+	}
+
+	if idResult, ok := insertResult.InsertedID.(primitive.ObjectID); ok {
+		return idResult, nil
+	} else {
+		return primitive.NilObjectID, err
+	}
 }
 
-func (r *repository) Update(ctx context.Context, airline entity.Airline) error {
+func (r *repository) Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error) {
+	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
+	updates := bson.D{}
 
+	typeData := reflect.TypeOf(airline)
+	values := reflect.ValueOf(airline)
+	for i := 1; i < typeData.NumField(); i++ {
+		field := typeData.Field(i)
+		val := values.Field(i)
+		tag := field.Tag.Get("json")
+
+		if !isZeroType(val) {
+			update := bson.E{Key: tag, Value: val.Interface()}
+			updates = append(updates, update)
+		}
+	}
+
+	filter := bson.D{{Key: "_id", Value: id}}
+	updateFilter := bson.D{{Key: "$set", Value: updates}}
+	updateResult, err := collection.UpdateOne(ctx, filter, updateFilter)
+
+	if err != nil {
+		return 0, err
+	}
+	return updateResult.ModifiedCount, nil
 }
 
-func (r *repository) Delete(ctx context.Context, id string) error {
+func (r *repository) Delete(ctx context.Context, id primitive.ObjectID) (int64, error) {
+	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
+	filter := bson.D{primitive.E{Key: "_id", Value: id}}
+	result, err := collection.DeleteOne(ctx, filter)
 
+	if err != nil {
+		return 0, bson.ErrDecodeToNil
+	}
+	return result.DeletedCount, nil
+}
+
+// isZeroType checks if the value from the struct is the zero value of its type
+func isZeroType(value reflect.Value) bool {
+	zero := reflect.Zero(value.Type()).Interface()
+
+	switch value.Kind() {
+	case reflect.Slice, reflect.Array, reflect.Chan, reflect.Map:
+		return value.Len() == 0
+	default:
+		return reflect.DeepEqual(zero, value.Interface())
+	}
 }

@@ -1,0 +1,10 @@
+database:
+  url: "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority"
+  dbname: "FlightBooker"
+
+server:
+  port: "8080"
+
+app:
+  name: "appdoc-api"
+  timeout: 3000
