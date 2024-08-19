@@ -20,7 +20,7 @@ const HomeBookingCard: React.FC = () => {
     const [to, setTo] = useState<number | undefined>(undefined);
     const [from, setFrom] = useState<number | undefined>(undefined);
 
-    const { types, locationTo, locationFrom, travelers, locationsToDispatch, locationsFromDispatch } =
+    const { types, locationTo, locationFrom, travelers, ticketClasses, locationsToDispatch, locationsFromDispatch } =
         useContextHandler();
 
     const showCard = (cardType: 'type' | 'from' | 'to' | 'passengers') => {
@@ -146,7 +146,7 @@ const HomeBookingCard: React.FC = () => {
                     <div className={styles.bookPassengers}>
                         <BookingButton
                             type="Passengers and class"
-                            value={travelers.reduce((sum, type) => sum + type.count!, 0).toString()}
+                            value={`${travelers.reduce((sum, type) => sum + type.count!, 0).toString()}, ${ticketClasses.find((tc) => tc.complete == true)?.name}`}
                             onClick={() => showCard('passengers')}
                         />
                     </div>
