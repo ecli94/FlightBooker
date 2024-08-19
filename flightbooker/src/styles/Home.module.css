@@ -250,6 +250,35 @@
     background-color: grey;
 }
 
+.checkboxContainer {
+    border: 1px solid #ccc;
+    display: grid;
+    padding: 10px;
+    justify-content: start;
+    grid-template-columns: 70% 10% 10% 10%;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.checkboxContainer:hover {
+    background-color: #000; /* Light gray background on hover */
+}
+
+.checkboxLabel {
+    align-content: center;
+    grid-column: 1/2; /* Place checkbox in the first column */
+}
+
+.checkboxBox {
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    grid-column: 4/5; /* Place label text in the second column */
+}
+
 @media screen and (max-width: 800px) {
     .leftcolumn,
     .rightcolumn {

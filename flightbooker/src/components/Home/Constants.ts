@@ -21,7 +21,7 @@ export const passengers: Passenger[] = [
 ];
 
 export const classes: Class[] = [
-    { id: 1, name: 'All travel classes' },
-    { id: 2, name: 'Economy' },
-    { id: 3, name: 'Business' },
+    { id: 1, name: 'All travel classes', complete: true },
+    { id: 2, name: 'Economy', complete: false },
+    { id: 3, name: 'Business', complete: false },
 ];
