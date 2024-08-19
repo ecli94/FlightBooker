@@ -1,4 +1,4 @@
-package airline
+package repository
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type Repository interface {
+type AirlineRepository interface {
 	Get(ctx context.Context, id primitive.ObjectID) (*entity.Airline, error)
 	Query(ctx context.Context, query string) ([]*entity.Airline, error)
 	GetAll(ctx context.Context) ([]*entity.Airline, error)
@@ -20,16 +20,16 @@ type Repository interface {
 	Delete(ctx context.Context, id primitive.ObjectID) (int64, error)
 }
 
-type repository struct {
+type airlineRepository struct {
 	client *mongo.Client
 	config *utils.Configuration
 }
 
-func NewRepository(client *mongo.Client, config *utils.Configuration) Repository {
-	return &repository{client: client, config: config}
+func NewRepository(client *mongo.Client, config *utils.Configuration) AirlineRepository {
+	return &airlineRepository{client, config}
 }
 
-func (r *repository) Get(ctx context.Context, id primitive.ObjectID) (*entity.Airline, error) {
+func (r *airlineRepository) Get(ctx context.Context, id primitive.ObjectID) (*entity.Airline, error) {
 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 	filter := bson.D{primitive.E{Key: "_id", Value: id}}
 	var airline *entity.Airline
@@ -37,7 +37,7 @@ func (r *repository) Get(ctx context.Context, id primitive.ObjectID) (*entity.Ai
 	return airline, nil
 }
 
-func (r *repository) Query(ctx context.Context, query string) ([]*entity.Airline, error) {
+func (r *airlineRepository) Query(ctx context.Context, query string) ([]*entity.Airline, error) {
 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
 	cursor, err := collection.Find(ctx, bson.D{{Key: "name",
@@ -60,7 +60,7 @@ func (r *repository) Query(ctx context.Context, query string) ([]*entity.Airline
 	return airlines, nil
 }
 
-func (r *repository) GetAll(ctx context.Context) ([]*entity.Airline, error) {
+func (r *airlineRepository) GetAll(ctx context.Context) ([]*entity.Airline, error) {
 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
 	cursor, err := collection.Find(ctx, bson.D{})
@@ -82,7 +82,7 @@ func (r *repository) GetAll(ctx context.Context) ([]*entity.Airline, error) {
 	return airlines, nil
 }
 
-func (r *repository) Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error) {
+func (r *airlineRepository) Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error) {
 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
 	insertResult, err := collection.InsertOne(ctx, airline)
@@ -98,7 +98,7 @@ func (r *repository) Create(ctx context.Context, airline entity.Airline) (primit
 	}
 }
 
-func (r *repository) Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error) {
+func (r *airlineRepository) Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error) {
 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 	updates := bson.D{}
 
@@ -125,7 +125,7 @@ func (r *repository) Update(ctx context.Context, id primitive.ObjectID, airline 
 	return updateResult.ModifiedCount, nil
 }
 
-func (r *repository) Delete(ctx context.Context, id primitive.ObjectID) (int64, error) {
+func (r *airlineRepository) Delete(ctx context.Context, id primitive.ObjectID) (int64, error) {
 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 	filter := bson.D{primitive.E{Key: "_id", Value: id}}
 	result, err := collection.DeleteOne(ctx, filter)
@@ -134,16 +134,4 @@ func (r *repository) Delete(ctx context.Context, id primitive.ObjectID) (int64, 
 		return 0, bson.ErrDecodeToNil
 	}
 	return result.DeletedCount, nil
-}
-
-// isZeroType checks if the value from the struct is the zero value of its type
-func isZeroType(value reflect.Value) bool {
-	zero := reflect.Zero(value.Type()).Interface()
-
-	switch value.Kind() {
-	case reflect.Slice, reflect.Array, reflect.Chan, reflect.Map:
-		return value.Len() == 0
-	default:
-		return reflect.DeepEqual(zero, value.Interface())
-	}
 }
