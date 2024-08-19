@@ -11,20 +11,20 @@ import CustomerService from './pages/CustomerService';
 import './App.css';
 
 const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <TopOfPage />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/book" element={<Book />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/language" element={<Language />} />
-        <Route path="/customerservice" element={<CustomerService />} />
-        <Route path="/*" element={<NoPage />} />
-      </Routes>
-      <BottomOfPage />
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <TopOfPage />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/book" element={<Book />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/language" element={<Language />} />
+                <Route path="/customerservice" element={<CustomerService />} />
+                <Route path="/*" element={<NoPage />} />
+            </Routes>
+            <BottomOfPage />
+        </BrowserRouter>
+    );
 };
 
 export default App;

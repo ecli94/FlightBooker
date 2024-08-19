@@ -2,7 +2,7 @@ import React from 'react';
 import BottomComponent from '../components/MainNavigation/BottomComponent';
 
 const BottomOfPage: React.FC = () => {
-  return <BottomComponent />;
+    return <BottomComponent />;
 };
 
 export default BottomOfPage;
