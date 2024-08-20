@@ -3,10 +3,10 @@ package entity
 import "time"
 
 type Booking struct {
-	Flight      `json:"flight"`
-	TravelClass `json:"travel_class"`
-	Seat        string    `json:"seat"`
-	Notes       string    `json:"notes"`
-	CreatedAt   time.Time `json:"created_at"`
-	ModifiedAt  time.Time `json:"modified_at"`
+	Flight      `bson:"flight" json:"flight"`
+	TravelClass `bson:"travel_class" json:"travel_class"`
+	Seat        string    `bson:"seat" json:"seat"`
+	Notes       string    `bson:"notes" json:"notes"`
+	CreatedAt   time.Time `bson:"created_at" json:"created_at"`
+	ModifiedAt  time.Time `bson:"modified_at" json:"modified_at"`
 }

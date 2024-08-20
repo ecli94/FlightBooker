@@ -3,8 +3,8 @@ package entity
 import "time"
 
 type TravelClass struct {
-	Name            string    `json:"name"`
-	PriceMultiplier float64   `json:"price_multiplier"`
-	CreatedAt       time.Time `json:"created_at"`
-	ModifiedAt      time.Time `json:"modified_at"`
+	Name            string    `bson:"name" json:"name"`
+	PriceMultiplier float64   `bson:"price_multiplier" json:"price_multiplier"`
+	CreatedAt       time.Time `bson:"created_at" json:"created_at"`
+	ModifiedAt      time.Time `bson:"modified_at" json:"modified_at"`
 }

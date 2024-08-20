@@ -3,9 +3,9 @@ package entity
 import "time"
 
 type Airport struct {
-	Name       string    `json:"name"`
-	IATA       string    `json:"iata"`
-	ICAO       string    `json:"icao"`
-	CreatedAt  time.Time `json:"created_at"`
-	ModifiedAt time.Time `json:"modified_at"`
+	Name       string    `bson:"name" json:"name"`
+	IATA       string    `bson:"iata" json:"iata"`
+	ICAO       string    `bson:"icao" json:"icao"`
+	CreatedAt  time.Time `bson:"created_at" json:"created_at"`
+	ModifiedAt time.Time `bson:"modified_at" json:"modified_at"`
 }

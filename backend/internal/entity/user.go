@@ -3,12 +3,11 @@ package entity
 import "time"
 
 type User struct {
-	Customer   `json:"customer"`
-	UserName   string    `json:"username"`
-	Password   string    `json:"password"`
-	Locked     bool      `json:"locked"`
-	Language   string    `json:"language"`
-	Currency   string    `json:"currency"`
-	CreatedAt  time.Time `json:"created_at"`
-	ModifiedAt time.Time `json:"modified_at"`
+	UserName   string `bson:"username" json:"username"`
+	Password   string `bson:"password" json:"password"`
+	Language   string `bson:"language" json:"language"`
+	Currency   string `bson:"currency" json:"currency"`
+	Customer   `bson:"customer" json:"customer"`
+	CreatedAt  time.Time `bson:"created_at" json:"created_at"`
+	ModifiedAt time.Time `bson:"modified_at" json:"modified_at"`
 }
