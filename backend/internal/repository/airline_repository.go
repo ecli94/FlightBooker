@@ -25,7 +25,7 @@ type airlineRepository struct {
 	config *utils.Configuration
 }
 
-func NewRepository(client *mongo.Client, config *utils.Configuration) AirlineRepository {
+func NewAirlineRepository(client *mongo.Client, config *utils.Configuration) AirlineRepository {
 	return &airlineRepository{client, config}
 }
 

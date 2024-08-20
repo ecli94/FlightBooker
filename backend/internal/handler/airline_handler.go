@@ -100,8 +100,13 @@ func (h *airlineHandler) Create(c *gin.Context) {
 	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
 	defer ctxErr()
 
-	var airlineEntity *entity.Airline
-	airlineEntity = &entity.Airline{}
+	var airlineEntity = &entity.Airline{
+		Name:       c.Param("name"),
+		IATA:       c.Param("iata"),
+		ICAO:       c.Param("icao"),
+		CreatedAt:  time.Now(),
+		ModifiedAt: time.Now(),
+	}
 
 	entity := entity.Airline(*airlineEntity)
 	oId, err := h.airlineRepo.Create(ctx, entity)
@@ -114,7 +119,32 @@ func (h *airlineHandler) Create(c *gin.Context) {
 }
 
 func (h *airlineHandler) Update(c *gin.Context) {
+	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
+	defer ctxErr()
 
+	id := c.Param("id")
+
+	oId, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		utils.BadRequestError("Unable to parse arline ID to update", err, map[string]interface{}{"Data": id})
+	}
+
+	var airlineEntity = &entity.Airline{
+		Name:       c.Param("name"),
+		IATA:       c.Param("iata"),
+		ICAO:       c.Param("icao"),
+		CreatedAt:  time.Now(),
+		ModifiedAt: time.Now(),
+	}
+
+	entity := entity.Airline(*airlineEntity)
+	uId, err := h.airlineRepo.Update(ctx, oId, entity)
+	if err != nil {
+		utils.BadRequestError("Airline_Handler_Update method", err, map[string]interface{}{"Data": entity})
+	}
+
+	c.IndentedJSON(http.StatusCreated, utils.Response("Airline_Handler_Update method",
+		map[string]interface{}{"Data": uId}))
 }
 
 func (h *airlineHandler) Delete(c *gin.Context) {
