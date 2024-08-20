@@ -8,20 +8,18 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const uri = "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority"
-
-func connect() (c *mongo.Client, e error) {
+func Connect(uri string) (*mongo.Client, error) {
 	var connectOnce sync.Once
 	var client *mongo.Client
 	var err error
 	connectOnce.Do(func() {
-		client, err = connectToMongoDB()
+		client, err = ConnectToMongoDB(uri)
 	})
 
 	return client, err
 }
 
-func connectToMongoDB() (*mongo.Client, error) {
+func ConnectToMongoDB(uri string) (*mongo.Client, error) {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
 		return nil, err
