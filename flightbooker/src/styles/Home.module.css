@@ -236,7 +236,7 @@
     position: relative;
     left: calc((1090px-800px) / 2);
     bottom: 80px;
-    height: 500px;
+    height: 620px;
     width: 800px;
 }
 
@@ -248,6 +248,37 @@
     text-decoration: none; /* Remove underline from links */
     border-radius: 25px;
     background-color: grey;
+}
+
+.passengerDoneButton {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 60px;
+}
+
+.passengerDoneButton button {
+    height: 50px;
+    width: 80px;
+    border-radius: 16px;
+}
+
+.passengerHeadingCloseButton {
+    border-radius: 100px;
+    border: 0px;
+    background-color: grey;
+    text-align: right;
+    font-size: 16px;
+    width: 64px;
+    padding-right: 50px;
+    justify-self: right;
+}
+
+.passengerHeadingContainer {
+    display: grid;
+    padding: 10px;
+    justify-content: start;
+    grid-template-columns: 1fr 1fr;
 }
 
 .checkboxContainer {
