@@ -13,8 +13,6 @@ const SelectPassengers: React.FC = () => {
     return (
         <>
             <div className={styles.passengerSelectVerticalMenu}>
-                <label className={styles.cardHeading}> Passengers and class</label>
-
                 {travelers.map((t, index) => (
                     <div key={index} className={styles.passengerRow}>
                         <div className={styles.passengerColumn}>
