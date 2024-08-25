@@ -91,6 +91,10 @@
     font-size: 20px;
 }
 
+.bookButton:hover {
+    cursor: pointer;
+}
+
 .bookRow {
     display: grid;
     padding: 10px;
@@ -170,6 +174,10 @@
     height: 100%;
 }
 
+.addPassengerButton:hover {
+    cursor: pointer;
+}
+
 .countPassengerLabel {
     align-content: start;
     height: 100%;
@@ -186,6 +194,16 @@
     align-items: center;
     justify-content: center;
     z-index: 1000; /* Ensure overlay is on top */
+}
+.citySelectOptions {
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.citySelectOptions:hover {
+    background-color: #000;
+    cursor: pointer;
 }
 
 .citySelectVerticalMenu {
@@ -263,6 +281,10 @@
     border-radius: 16px;
 }
 
+.passengerDoneButton button:hover {
+    cursor: pointer;
+}
+
 .passengerHeadingCloseButton {
     border-radius: 100px;
     border: 0px;
@@ -272,6 +294,10 @@
     width: 64px;
     padding-right: 50px;
     justify-self: right;
+}
+
+.passengerHeadingCloseButton:hover {
+    cursor: pointer;
 }
 
 .passengerHeadingContainer {
@@ -294,6 +320,7 @@
 
 .checkboxContainer:hover {
     background-color: #000; /* Light gray background on hover */
+    cursor: pointer;
 }
 
 .checkboxLabel {

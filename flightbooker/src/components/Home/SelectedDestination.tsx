@@ -43,15 +43,15 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
                     value={props.direction == 'Destinations' ? props.to : props.from}
                     onChange={handleLocationChange}
                 >
-                    {props.direction == 'Destinations' &&
-                        locationTo.map((t) => (
-                            <option className={styles.citySelectOptions} key={t.id} value={t.id}>
+                    {props.direction == 'Departure locations' &&
+                        locationFrom.map((t) => (
+                            <option key={t.id} className={styles.citySelectOptions} value={t.id}>
                                 {t.city}, {t.country}
                             </option>
                         ))}
-                    {props.direction == 'Departure locations' &&
-                        locationFrom.map((t) => (
-                            <option className={styles.citySelectOptions} key={t.id} value={t.id}>
+                    {props.direction == 'Destinations' &&
+                        locationTo.map((t) => (
+                            <option key={t.id} className={styles.citySelectOptions} value={t.id}>
                                 {t.city}, {t.country}
                             </option>
                         ))}

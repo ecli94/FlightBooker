@@ -29,6 +29,7 @@ const SelectPassengers: React.FC = () => {
                                 className={styles.removePassengerButton}
                                 disabled={disableRemove(t)}
                                 onClick={() => passengerDispatch({ type: 'REMOVE-PASSENGER', id: t.id })}
+                                style={disableRemove(t) ? {} : { cursor: 'pointer' }}
                             >
                                 <span>-</span>
                             </button>
