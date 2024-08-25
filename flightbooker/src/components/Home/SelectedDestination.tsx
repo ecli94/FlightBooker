@@ -35,7 +35,9 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
     return (
         <>
             <div className={styles.citySelectVerticalMenu}>
-                <label className={styles.cardHeading}> {props.direction}</label>
+                <label className={styles.cardHeading}>
+                    <span> {props.direction}</span>
+                </label>
                 <select
                     id="locations"
                     name="locations"
