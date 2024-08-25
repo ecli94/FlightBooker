@@ -66,6 +66,10 @@
     font-size: large;
 }
 
+.cardHeading span {
+    color: white;
+}
+
 /* Clear floats after the columns */
 .row::after {
     content: '';
@@ -93,6 +97,7 @@
 }
 
 .bookButton:hover {
+    background-color: grey;
     cursor: pointer;
 }
 
