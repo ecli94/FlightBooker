@@ -17,7 +17,7 @@ const PassengerCard = forwardRef<HTMLDivElement, PassengerCardProps>((props, ref
         <div className={styles.overlay} onClick={props.closeCard}>
             <div ref={ref} id="passenger" className={styles.passengerCard} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.passengerHeadingContainer}>
-                    <label className={styles.cardHeading}> Passengers and class</label>
+                    <span className={styles.cardHeading}> Passengers and class</span>
                     <button className={styles.passengerHeadingCloseButton} onClick={props.closeCard}>
                         {' '}
                         X{' '}

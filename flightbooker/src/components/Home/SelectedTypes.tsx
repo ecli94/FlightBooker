@@ -7,23 +7,24 @@ interface SelectedTypesProps {
 const SelectedTypes = (props: SelectedTypesProps) => {
     const { types } = useContextHandler();
     return (
-        <>
-            <div>
-                <form>
-                    <label className={styles.cardHeading}>Trip types</label>
-                    {types.map((t) => (
-                        <label key={t.id}>
-                            <input
-                                type="checkbox"
-                                checked={t.complete}
-                                onChange={() => props.onChangeCallback('COMPLETE', t.id)}
-                            />
-                            {t.name}
-                        </label>
-                    ))}
-                </form>
-            </div>
-        </>
+        <form>
+            {types.map((t) => (
+                <div
+                    onClick={() => props.onChangeCallback('COMPLETE', t.id)}
+                    key={t.id}
+                    className={styles.checkboxContainer}
+                >
+                    <span className={styles.checkboxLabel}>{t.name}</span>
+                    <span className={styles.checkboxBox}>
+                        <input
+                            type="checkbox"
+                            checked={t.complete}
+                            onChange={() => props.onChangeCallback('COMPLETE', t.id)}
+                        />
+                    </span>
+                </div>
+            ))}
+        </form>
     );
 };
 
