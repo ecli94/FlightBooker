@@ -26,23 +26,26 @@ const SelectPassengers: React.FC = () => {
 
                         <div className={styles.removePassengerColumn}>
                             <button
-                                className={styles.removePassengerButton}
+                                className={
+                                    disableRemove(t) ? styles.removePassengerButton : styles.removePassengerButtonActive
+                                }
                                 disabled={disableRemove(t)}
                                 onClick={() => passengerDispatch({ type: 'REMOVE-PASSENGER', id: t.id })}
-                                style={disableRemove(t) ? {} : { cursor: 'pointer' }}
                             >
-                                <span>-</span>
+                                <span style={{ fontSize: '24px' }}>-</span>
                             </button>
                         </div>
                         <div className={styles.passengerCountColumn}>
-                            <label className={styles.countPassengerLabel}>{t.count}</label>
+                            <label className={styles.countPassengerLabel}>
+                                <span>{t.count}</span>
+                            </label>
                         </div>
                         <div className={styles.addPassengerColumn}>
                             <button
                                 className={styles.addPassengerButton}
                                 onClick={() => passengerDispatch({ type: 'ADD-PASSENGER', id: t.id })}
                             >
-                                <span>+</span>
+                                <span style={{ fontSize: '24px' }}>+</span>
                             </button>
                         </div>
                     </div>

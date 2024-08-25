@@ -15,13 +15,7 @@ const TypeCard = forwardRef<HTMLDivElement, TypeCardProps>((props, ref) => {
     };
     return (
         <div className={styles.overlay} onClick={props.closeCard}>
-            <div
-                ref={ref}
-                id="tripType"
-                className={styles.passengerCard}
-                style={{ height: '30%' }}
-                onClick={(e) => e.stopPropagation()}
-            >
+            <div ref={ref} id="tripType" className={styles.typeCard} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.passengerHeadingContainer}>
                     <span className={styles.cardHeading}> Trip type</span>
                     <button className={styles.passengerHeadingCloseButton} onClick={props.closeCard}>
@@ -30,7 +24,7 @@ const TypeCard = forwardRef<HTMLDivElement, TypeCardProps>((props, ref) => {
                     </button>
                 </div>
                 <SelectedTypes onChangeCallback={onChangeType} />
-                <div className={styles.passengerDoneButton} style={{ marginTop: '40px' }}>
+                <div className={styles.passengerDoneButton} style={{ marginTop: '25px' }}>
                     <button onClick={props.closeCard}> Done </button>
                 </div>
             </div>
