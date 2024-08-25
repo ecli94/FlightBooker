@@ -50,7 +50,7 @@ const HomeBookingCard: React.FC = () => {
             locationsToDispatch({ type: 'INCOMPLETE', id: toId });
             setTo(undefined);
         }
-    }, [locationFrom]);
+    }, [locationFrom]); //eslint-disable-line
 
     useEffect(() => {
         const toId =
@@ -64,7 +64,7 @@ const HomeBookingCard: React.FC = () => {
             locationsFromDispatch({ type: 'INCOMPLETE', id: toId });
             setFrom(undefined);
         }
-    }, [locationTo]);
+    }, [locationTo]); //eslint-disable-line
 
     const closeTypeCard = () => {
         setIsTypeCardVisible(false);
