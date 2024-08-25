@@ -13,6 +13,7 @@ const SelectedClasses = (props: SelectedClassesProps) => {
                     onClick={() => props.onChangeCallback('COMPLETE', t.id)}
                     key={t.id}
                     className={styles.checkboxContainer}
+                    style={t.complete ? { backgroundColor: 'darkgray' } : {}}
                 >
                     <span className={styles.checkboxLabel}>{t.name}</span>
                     <span className={styles.checkboxBox}>
