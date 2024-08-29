@@ -253,6 +253,12 @@
     padding: 12px;
 }
 
+.airportPicker {
+    --gmpx-color-surface: white;
+    flex-grow: 1;
+    width: 100%;
+}
+
 .passengerSelectVerticalMenu {
     width: 100%;
 }
@@ -307,6 +313,27 @@
 }
 
 .typeCard label {
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 25px;
+    background-color: grey;
+}
+
+.cityCard {
+    text-align: left;
+    background-color: grey;
+    border-radius: 25px;
+    position: relative;
+    left: calc((1090px-800px) / 2);
+    bottom: 80px;
+    height: 400px;
+    width: 800px;
+}
+
+.cityCard label {
     background-color: #eee; /* Grey background color */
     color: black; /* Black text color */
     display: block; /* Make the links appear below each other */
