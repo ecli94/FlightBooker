@@ -17,11 +17,10 @@ const HomeBookingCard: React.FC = () => {
     const [isFromCardVisible, setIsFromCardVisible] = useState(false);
     const [isToCardVisible, setIsToCardVisible] = useState(false);
     const [isPassengerCardVisible, setIsPassengerCardVisible] = useState(false);
-    const [to, setTo] = useState<number | undefined>(undefined);
-    const [from, setFrom] = useState<number | undefined>(undefined);
+    const [to, setTo] = useState<string | undefined>(undefined);
+    const [from, setFrom] = useState<string | undefined>(undefined);
 
-    const { types, locationTo, locationFrom, travelers, ticketClasses, locationsToDispatch, locationsFromDispatch } =
-        useContextHandler();
+    const { types, travelers, ticketClasses } = useContextHandler();
 
     const showCard = (cardType: 'type' | 'from' | 'to' | 'passengers') => {
         // Prevent click from propagating to the document
@@ -33,38 +32,16 @@ const HomeBookingCard: React.FC = () => {
 
     const isOneWayPhaseTwo = (): boolean => {
         const oneWaySelected = types.find((x) => x.name == 'One way')?.complete;
-        const toSelected = locationTo.some((x) => x.complete == true);
-        const fromSelected = locationFrom.some((x) => x.complete == true);
-        return (oneWaySelected ?? false) && toSelected && fromSelected;
+        return (oneWaySelected ?? false) && to !== undefined && from !== undefined;
     };
 
     useEffect(() => {
-        const toId =
-            locationTo.find((it) => it.complete) !== undefined ? (locationTo.find((it) => it.complete)!.id ?? 0) : 0;
-        const fromId =
-            locationFrom.find((it) => it.complete) !== undefined
-                ? (locationFrom.find((it) => it.complete)!.id ?? 0)
-                : 0;
-
-        if (toId == fromId && toId != 0) {
-            locationsToDispatch({ type: 'INCOMPLETE', id: toId });
-            setTo(undefined);
-        }
-    }, [locationFrom]); //eslint-disable-line
+        if (to === from) setTo(undefined);
+    }, [from]); //eslint-disable-line
 
     useEffect(() => {
-        const toId =
-            locationTo.find((it) => it.complete) !== undefined ? (locationTo.find((it) => it.complete)!.id ?? 0) : 0;
-        const fromId =
-            locationFrom.find((it) => it.complete) !== undefined
-                ? (locationFrom.find((it) => it.complete)!.id ?? 0)
-                : 0;
-
-        if (toId == fromId && fromId != 0) {
-            locationsFromDispatch({ type: 'INCOMPLETE', id: toId });
-            setFrom(undefined);
-        }
-    }, [locationTo]); //eslint-disable-line
+        if (to === from) setFrom(undefined);
+    }, [to]); //eslint-disable-line
 
     const closeTypeCard = () => {
         setIsTypeCardVisible(false);
@@ -121,26 +98,10 @@ const HomeBookingCard: React.FC = () => {
                     />
                 </div>
                 <div className={styles.bookFrom}>
-                    <BookingButton
-                        type="From"
-                        value={
-                            locationFrom.find((x) => x.complete == true) !== undefined
-                                ? (locationFrom.find((x) => x.complete == true)!.city ?? '')
-                                : ''
-                        }
-                        onClick={() => showCard('from')}
-                    />
+                    <BookingButton type="From" value={from ?? ''} onClick={() => showCard('from')} />
                 </div>
                 <div className={styles.bookTo}>
-                    <BookingButton
-                        type="To"
-                        value={
-                            locationTo.find((x) => x.complete == true) !== undefined
-                                ? (locationTo.find((x) => x.complete == true)!.city ?? '')
-                                : ''
-                        }
-                        onClick={() => showCard('to')}
-                    />
+                    <BookingButton type="To" value={to ?? ''} onClick={() => showCard('to')} />
                 </div>
                 {isOneWayPhaseTwo() && (
                     <div className={styles.bookPassengers}>
@@ -153,15 +114,7 @@ const HomeBookingCard: React.FC = () => {
                 )}
                 {isOneWayPhaseTwo() && (
                     <div className={styles.bookDateOneWay}>
-                        <BookingButton
-                            type="Depart"
-                            value={
-                                locationTo.find((x) => x.complete == true) !== undefined
-                                    ? (locationTo.find((x) => x.complete == true)!.city ?? '')
-                                    : ''
-                            }
-                            onClick={() => showCard('to')}
-                        />
+                        <BookingButton type="Depart" value={to ?? ''} onClick={() => showCard('to')} />
                     </div>
                 )}
             </div>
