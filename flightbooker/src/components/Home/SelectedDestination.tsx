@@ -54,7 +54,7 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
                 <APILoader
                     // api key will be ommitted when pushed to github.
                     // must implement env variables and use that instead here
-                    apiKey={'YOUR-API-KEY'}
+                    apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
                     solutionChannel={'GMP_GCC_placepicker_to'}
                 />
                 <div>
