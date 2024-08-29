@@ -36,33 +36,11 @@ const HomeBookingCard: React.FC = () => {
     };
 
     useEffect(() => {
-        // const toId =
-        //     locationTo.find((it) => it.complete) !== undefined ? (locationTo.find((it) => it.complete)!.id ?? 0) : 0;
-        // const fromId =
-        //     locationFrom.find((it) => it.complete) !== undefined
-        //         ? (locationFrom.find((it) => it.complete)!.id ?? 0)
-        //         : 0;
-
-        // if (toId == fromId && toId != 0) {
-        //     locationsToDispatch({ type: 'INCOMPLETE', id: toId });
-        //     setTo(undefined);
-        // }
-        if (to === from && to !== undefined) setTo(undefined);
+        if (to === from) setTo(undefined);
     }, [from]); //eslint-disable-line
 
     useEffect(() => {
-        // const toId =
-        //     locationTo.find((it) => it.complete) !== undefined ? (locationTo.find((it) => it.complete)!.id ?? 0) : 0;
-        // const fromId =
-        //     locationFrom.find((it) => it.complete) !== undefined
-        //         ? (locationFrom.find((it) => it.complete)!.id ?? 0)
-        //         : 0;
-
-        // if (toId == fromId && fromId != 0) {
-        //     locationsFromDispatch({ type: 'INCOMPLETE', id: toId });
-        //     setFrom(undefined);
-        // }
-        if (to === from && from !== undefined) setFrom(undefined);
+        if (to === from) setFrom(undefined);
     }, [to]); //eslint-disable-line
 
     const closeTypeCard = () => {

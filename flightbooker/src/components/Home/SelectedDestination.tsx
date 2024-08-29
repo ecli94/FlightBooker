@@ -12,7 +12,9 @@ interface SelectDestinationProps {
 }
 
 const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
-    const cleanLocation = (loc: string) => {
+    const cleanLocation = (loc?: string) => {
+        if (loc === undefined) return;
+
         const locArray = loc.split(',');
         let cleanCity;
         const uncleanCity = locArray[locArray.length - 2].trim();
@@ -26,24 +28,18 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
             default:
                 cleanCity = uncleanCity;
         }
-        console.log(uncleanCity);
-        console.log(cleanCity);
         return (cleanCity ? cleanCity : uncleanCity) + ',' + locArray[locArray.length - 1];
     };
-    const handleLocationChange = (event: any) => {
-        // const id = parseInt(event.target.value, 10);
+    const handleLocationChange = (event: Event) => {
+        const target = event.target as HTMLInputElement & { value: { formattedAddress?: string } };
         switch (props.direction) {
             case 'Departure locations':
-                // locationsFromDispatch({ type: 'COMPLETE', id: id });
                 props.closeCallback();
-                // props.setFrom(locationFrom.find((loc) => loc.id == id)?.id);
-                props.setFrom(cleanLocation(event.target.value?.formattedAddress) ?? '');
+                props.setFrom(cleanLocation(target.value?.formattedAddress) ?? '');
                 break;
             case 'Destinations':
-                // locationsToDispatch({ type: 'COMPLETE', id: id });
                 props.closeCallback();
-                // props.setTo(locationTo.find((loc) => loc.id == id)?.id);
-                props.setTo(cleanLocation(event.target.value?.formattedAddress) ?? '');
+                props.setTo(cleanLocation(target.value?.formattedAddress) ?? '');
                 break;
             default:
                 throw new TypeError('Incorrect direction was provided');
@@ -71,26 +67,6 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
                         onPlaceChange={handleLocationChange}
                     />
                 </div>
-                {/* <select
-                    id="locations"
-                    name="locations"
-                    size={8}
-                    value={props.direction == 'Destinations' ? props.to : props.from}
-                    onChange={handleLocationChange}
-                >
-                    {props.direction == 'Departure locations' &&
-                        locationFrom.map((t) => (
-                            <option key={t.id} className={styles.citySelectOptions} value={t.id}>
-                                {t.city}, {t.country}
-                            </option>
-                        ))}
-                    {props.direction == 'Destinations' &&
-                        locationTo.map((t) => (
-                            <option key={t.id} className={styles.citySelectOptions} value={t.id}>
-                                {t.city}, {t.country}
-                            </option>
-                        ))}
-                </select> */}
             </div>
         </>
     );
