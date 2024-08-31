@@ -27,12 +27,12 @@ func InitAirportApi(config utils.Configuration) {
 
 	api := airportRouter.Group("api/v1")
 	{
-		api.GET("/airline/get/:id", airportHandler.Get)
-		api.GET("/airline/search/:query", airportHandler.Query)
-		api.GET("/airline/getall", airportHandler.GetAll)
-		api.POST("/airline/create", airportHandler.Create)
-		api.PUT("/airline/update/:id", airportHandler.Update)
-		api.DELETE("/airline/delete/:id", airportHandler.Delete)
+		api.GET("/airport/get/:id", airportHandler.Get)
+		api.GET("/airport/search/:query", airportHandler.Query)
+		api.GET("/airport/getall", airportHandler.GetAll)
+		api.POST("/airport/create", airportHandler.Create)
+		api.PUT("/airport/update/:id", airportHandler.Update)
+		api.DELETE("/airport/delete/:id", airportHandler.Delete)
 	}
 
 	// PORT environment variable was defined.

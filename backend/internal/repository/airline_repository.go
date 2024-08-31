@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	"reflect"
 
 	"github.com/ecli94/FlightBooker/cmd/utils"
 	"github.com/ecli94/FlightBooker/internal/entity"
@@ -15,9 +14,9 @@ type AirlineRepository interface {
 	Get(ctx context.Context, id primitive.ObjectID) (*entity.Airline, error)
 	Query(ctx context.Context, query string) ([]*entity.Airline, error)
 	GetAll(ctx context.Context) ([]*entity.Airline, error)
-	Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error)
-	Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error)
-	Delete(ctx context.Context, id primitive.ObjectID) (int64, error)
+	// Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error)
+	// Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error)
+	// Delete(ctx context.Context, id primitive.ObjectID) (int64, error)
 }
 
 type airlineRepository struct {
@@ -82,56 +81,56 @@ func (r *airlineRepository) GetAll(ctx context.Context) ([]*entity.Airline, erro
 	return airlines, nil
 }
 
-func (r *airlineRepository) Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error) {
-	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
+// func (r *airlineRepository) Create(ctx context.Context, airline entity.Airline) (primitive.ObjectID, error) {
+// 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
 
-	insertResult, err := collection.InsertOne(ctx, airline)
+// 	insertResult, err := collection.InsertOne(ctx, airline)
 
-	if err != mongo.ErrNilCursor {
-		return primitive.NilObjectID, err
-	}
+// 	if err != mongo.ErrNilCursor {
+// 		return primitive.NilObjectID, err
+// 	}
 
-	if idResult, ok := insertResult.InsertedID.(primitive.ObjectID); ok {
-		return idResult, nil
-	} else {
-		return primitive.NilObjectID, err
-	}
-}
+// 	if idResult, ok := insertResult.InsertedID.(primitive.ObjectID); ok {
+// 		return idResult, nil
+// 	} else {
+// 		return primitive.NilObjectID, err
+// 	}
+// }
 
-func (r *airlineRepository) Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error) {
-	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
-	updates := bson.D{}
+// func (r *airlineRepository) Update(ctx context.Context, id primitive.ObjectID, airline entity.Airline) (int64, error) {
+// 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
+// 	updates := bson.D{}
 
-	typeData := reflect.TypeOf(airline)
-	values := reflect.ValueOf(airline)
-	for i := 1; i < typeData.NumField(); i++ {
-		field := typeData.Field(i)
-		val := values.Field(i)
-		tag := field.Tag.Get("json")
+// 	typeData := reflect.TypeOf(airline)
+// 	values := reflect.ValueOf(airline)
+// 	for i := 1; i < typeData.NumField(); i++ {
+// 		field := typeData.Field(i)
+// 		val := values.Field(i)
+// 		tag := field.Tag.Get("json")
 
-		if !isZeroType(val) {
-			update := bson.E{Key: tag, Value: val.Interface()}
-			updates = append(updates, update)
-		}
-	}
+// 		if !isZeroType(val) {
+// 			update := bson.E{Key: tag, Value: val.Interface()}
+// 			updates = append(updates, update)
+// 		}
+// 	}
 
-	filter := bson.D{{Key: "_id", Value: id}}
-	updateFilter := bson.D{{Key: "$set", Value: updates}}
-	updateResult, err := collection.UpdateOne(ctx, filter, updateFilter)
+// 	filter := bson.D{{Key: "_id", Value: id}}
+// 	updateFilter := bson.D{{Key: "$set", Value: updates}}
+// 	updateResult, err := collection.UpdateOne(ctx, filter, updateFilter)
 
-	if err != nil {
-		return 0, err
-	}
-	return updateResult.ModifiedCount, nil
-}
+// 	if err != nil {
+// 		return 0, err
+// 	}
+// 	return updateResult.ModifiedCount, nil
+// }
 
-func (r *airlineRepository) Delete(ctx context.Context, id primitive.ObjectID) (int64, error) {
-	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
-	filter := bson.D{primitive.E{Key: "_id", Value: id}}
-	result, err := collection.DeleteOne(ctx, filter)
+// func (r *airlineRepository) Delete(ctx context.Context, id primitive.ObjectID) (int64, error) {
+// 	collection := r.client.Database(r.config.Database.DbName).Collection("Airline")
+// 	filter := bson.D{primitive.E{Key: "_id", Value: id}}
+// 	result, err := collection.DeleteOne(ctx, filter)
 
-	if err != nil {
-		return 0, bson.ErrDecodeToNil
-	}
-	return result.DeletedCount, nil
-}
+// 	if err != nil {
+// 		return 0, bson.ErrDecodeToNil
+// 	}
+// 	return result.DeletedCount, nil
+// }

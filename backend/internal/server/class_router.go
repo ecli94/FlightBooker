@@ -11,29 +11,28 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func InitAirlineApi(config utils.Configuration) {
+func InitClassApi(config utils.Configuration) {
 	client, err := dbcontext.Connect(config.Database.Url)
 
 	if err != nil {
 		logrus.Fatal(err)
 	}
 
-	airlineRepository := repository.NewAirlineRepository(client, &config)
-	airlineHandler := handler.NewAirlineHandler(client, airlineRepository, config)
+	classRepository := repository.NewClassRepository(client, &config)
+	classHandler := handler.NewClassHandler(client, classRepository, config)
 
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
-	airlineRouter := gin.Default()
+	classRouter := gin.Default()
 
-	api := airlineRouter.Group("api/v1")
+	api := classRouter.Group("api/v1")
 	{
-		api.GET("/airline/get/:id", airlineHandler.Get)
-		api.GET("/airline/search/:query", airlineHandler.Query)
-		api.GET("/airline/getall", airlineHandler.GetAll)
+		api.GET("/class/get/:id", classHandler.Get)
+		api.GET("/class/getall", classHandler.GetAll)
 	}
 
 	// PORT environment variable was defined.
 	formattedUrl := fmt.Sprintf(":%s", config.Server.Port)
 
-	airlineRouter.Run(formattedUrl)
+	classRouter.Run(formattedUrl)
 }

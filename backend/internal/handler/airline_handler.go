@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/ecli94/FlightBooker/cmd/utils"
-	"github.com/ecli94/FlightBooker/internal/entity"
 	"github.com/ecli94/FlightBooker/internal/model"
 	"github.com/ecli94/FlightBooker/internal/repository"
 	"github.com/gin-gonic/gin"
@@ -18,9 +17,9 @@ type AirlineHandler interface {
 	Get(*gin.Context)
 	Query(*gin.Context)
 	GetAll(*gin.Context)
-	Create(*gin.Context)
-	Update(*gin.Context)
-	Delete(*gin.Context)
+	// Create(*gin.Context)
+	// Update(*gin.Context)
+	// Delete(*gin.Context)
 }
 
 type airlineHandler struct {
@@ -96,72 +95,72 @@ func (h *airlineHandler) GetAll(c *gin.Context) {
 		map[string]interface{}{"Data": airlineModelList}))
 }
 
-func (h *airlineHandler) Create(c *gin.Context) {
-	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
-	defer ctxErr()
+// func (h *airlineHandler) Create(c *gin.Context) {
+// 	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
+// 	defer ctxErr()
 
-	var airlineEntity = &entity.Airline{
-		Name:       c.Param("name"),
-		IATA:       c.Param("iata"),
-		ICAO:       c.Param("icao"),
-		CreatedAt:  time.Now(),
-		ModifiedAt: time.Now(),
-	}
+// 	var airlineEntity = &entity.Airline{
+// 		Name:       c.Param("name"),
+// 		IATA:       c.Param("iata"),
+// 		ICAO:       c.Param("icao"),
+// 		CreatedAt:  time.Now(),
+// 		ModifiedAt: time.Now(),
+// 	}
 
-	entity := entity.Airline(*airlineEntity)
-	oId, err := h.airlineRepo.Create(ctx, entity)
-	if err != nil {
-		utils.BadRequestError("Airline_Handler_Create method", err, map[string]interface{}{"Data": entity})
-	}
+// 	entity := entity.Airline(*airlineEntity)
+// 	oId, err := h.airlineRepo.Create(ctx, entity)
+// 	if err != nil {
+// 		utils.BadRequestError("Airline_Handler_Create method", err, map[string]interface{}{"Data": entity})
+// 	}
 
-	c.IndentedJSON(http.StatusCreated, utils.Response("Airline_Handler_Create method",
-		map[string]interface{}{"Data": oId}))
-}
+// 	c.IndentedJSON(http.StatusCreated, utils.Response("Airline_Handler_Create method",
+// 		map[string]interface{}{"Data": oId}))
+// }
 
-func (h *airlineHandler) Update(c *gin.Context) {
-	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
-	defer ctxErr()
+// func (h *airlineHandler) Update(c *gin.Context) {
+// 	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
+// 	defer ctxErr()
 
-	id := c.Param("id")
+// 	id := c.Param("id")
 
-	oId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		utils.BadRequestError("Unable to parse airline ID to update", err, map[string]interface{}{"Data": id})
-	}
+// 	oId, err := primitive.ObjectIDFromHex(id)
+// 	if err != nil {
+// 		utils.BadRequestError("Unable to parse airline ID to update", err, map[string]interface{}{"Data": id})
+// 	}
 
-	var airlineEntity = &entity.Airline{
-		Name:       c.Param("name"),
-		IATA:       c.Param("iata"),
-		ICAO:       c.Param("icao"),
-		ModifiedAt: time.Now(),
-	}
+// 	var airlineEntity = &entity.Airline{
+// 		Name:       c.Param("name"),
+// 		IATA:       c.Param("iata"),
+// 		ICAO:       c.Param("icao"),
+// 		ModifiedAt: time.Now(),
+// 	}
 
-	entity := entity.Airline(*airlineEntity)
-	uId, err := h.airlineRepo.Update(ctx, oId, entity)
-	if err != nil {
-		utils.BadRequestError("Airline_Handler_Update method", err, map[string]interface{}{"Data": entity})
-	}
+// 	entity := entity.Airline(*airlineEntity)
+// 	uId, err := h.airlineRepo.Update(ctx, oId, entity)
+// 	if err != nil {
+// 		utils.BadRequestError("Airline_Handler_Update method", err, map[string]interface{}{"Data": entity})
+// 	}
 
-	c.IndentedJSON(http.StatusCreated, utils.Response("Airline_Handler_Update method",
-		map[string]interface{}{"Data": uId}))
-}
+// 	c.IndentedJSON(http.StatusCreated, utils.Response("Airline_Handler_Update method",
+// 		map[string]interface{}{"Data": uId}))
+// }
 
-func (h *airlineHandler) Delete(c *gin.Context) {
-	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
-	defer ctxErr()
+// func (h *airlineHandler) Delete(c *gin.Context) {
+// 	ctx, ctxErr := context.WithTimeout(c.Request.Context(), time.Duration(h.config.App.Timeout)*time.Second)
+// 	defer ctxErr()
 
-	id := c.Param("id")
+// 	id := c.Param("id")
 
-	oId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		utils.BadRequestError("Unable to parse airline ID to delete", err, map[string]interface{}{"Data": id})
-	}
+// 	oId, err := primitive.ObjectIDFromHex(id)
+// 	if err != nil {
+// 		utils.BadRequestError("Unable to parse airline ID to delete", err, map[string]interface{}{"Data": id})
+// 	}
 
-	result, err := h.airlineRepo.Delete(ctx, oId)
-	if err != nil {
-		utils.BadRequestError("Airline_Handler_Delete method", err, map[string]interface{}{"Data": id})
-	}
+// 	result, err := h.airlineRepo.Delete(ctx, oId)
+// 	if err != nil {
+// 		utils.BadRequestError("Airline_Handler_Delete method", err, map[string]interface{}{"Data": id})
+// 	}
 
-	c.IndentedJSON(http.StatusOK, utils.Response("Airline_Handler_Delete method",
-		map[string]interface{}{"Data": result}))
-}
+// 	c.IndentedJSON(http.StatusOK, utils.Response("Airline_Handler_Delete method",
+// 		map[string]interface{}{"Data": result}))
+// }
