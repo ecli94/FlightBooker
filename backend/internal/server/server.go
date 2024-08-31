@@ -5,7 +5,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func Initialize(config utils.Configuration) {
+func InitServer(config utils.Configuration) {
 	var log = logrus.New()
 
 	log.WithFields(logrus.Fields{

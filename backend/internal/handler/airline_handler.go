@@ -43,7 +43,7 @@ func (h *airlineHandler) Get(c *gin.Context) {
 
 	oId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		utils.BadRequestError("Unable to parse arline ID to retrieve", err, map[string]interface{}{"Data": id})
+		utils.BadRequestError("Unable to parse airline ID to retrieve", err, map[string]interface{}{"Data": id})
 	}
 
 	result, err := h.airlineRepo.Get(ctx, oId)
@@ -126,14 +126,13 @@ func (h *airlineHandler) Update(c *gin.Context) {
 
 	oId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		utils.BadRequestError("Unable to parse arline ID to update", err, map[string]interface{}{"Data": id})
+		utils.BadRequestError("Unable to parse airline ID to update", err, map[string]interface{}{"Data": id})
 	}
 
 	var airlineEntity = &entity.Airline{
 		Name:       c.Param("name"),
 		IATA:       c.Param("iata"),
 		ICAO:       c.Param("icao"),
-		CreatedAt:  time.Now(),
 		ModifiedAt: time.Now(),
 	}
 

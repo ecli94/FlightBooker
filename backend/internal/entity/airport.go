@@ -6,6 +6,8 @@ type Airport struct {
 	Name       string    `bson:"name" json:"name"`
 	IATA       string    `bson:"iata" json:"iata"`
 	ICAO       string    `bson:"icao" json:"icao"`
+	City       string    `bson:"city" json:"city"`
+	Country    string    `bson:"country" json:"country"`
 	CreatedAt  time.Time `bson:"created_at" json:"created_at"`
 	ModifiedAt time.Time `bson:"modified_at" json:"modified_at"`
 }
