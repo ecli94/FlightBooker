@@ -1,0 +1,135 @@
+.mainContainer {
+    display: grid;
+    height: 95vh;
+    justify-content: start;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+}
+
+.headerContainer {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-column: 1/16;
+    grid-row: 1/2;
+}
+
+.logo {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    margin-left: 50px;
+}
+
+.locationLanguage {
+    grid-column: 12/14;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+}
+
+.login {
+    grid-column: 14/16;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+}
+
+.locationLanguage img {
+    height: 40px;
+    border-radius: 25px;
+}
+
+.locationLanguage span {
+    margin-left: 15px;
+    align-self: center;
+}
+
+.login img {
+    height: 40px;
+    border-radius: 25px;
+}
+
+.login span {
+    margin-left: 15px;
+    align-self: center;
+}
+
+.menuContainer {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    background-color: #008bef;
+    grid-column: 1/16;
+    grid-row: 2/3;
+}
+
+.menu {
+    grid-column: 1/3;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    margin-left: 20px;
+}
+
+.menu img {
+    height: 40px;
+}
+
+.menu span {
+    margin-left: 10px;
+    align-self: center;
+    font-size: 24px;
+}
+
+.book {
+    grid-column: 8/10;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+}
+
+.book img {
+    height: 40px;
+    align-self: center;
+}
+
+.book span {
+    margin-left: 10px;
+    align-self: center;
+    font-size: 24px;
+}
+
+.search {
+    grid-column: 14/16;
+    grid-row: 1/2;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    margin-left: 20px;
+}
+
+.search img {
+    height: 40px;
+    align-self: center;
+}
+
+.search span {
+    margin-left: 10px;
+    align-self: center;
+    font-size: 24px;
+}
+
+.bookContainer {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+    grid-column: 1/16;
+    grid-row: 2/8;
+}
