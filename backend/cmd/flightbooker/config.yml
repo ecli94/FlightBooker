@@ -1,5 +1,5 @@
 database:
-  url: "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority"
+  url: "mongodb+srv://dbUser:NotAPassword123@flightbookercluster.zia92pq.mongodb.net/?retryWrites=true&w=majority&appName=FlightBookerCluster"
   dbname: "FlightBooker"
 
 server:
