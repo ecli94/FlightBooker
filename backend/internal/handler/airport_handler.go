@@ -101,13 +101,11 @@ func (h *airportHandler) Create(c *gin.Context) {
 	defer ctxErr()
 
 	var airportEntity = &entity.Airport{
-		Name:       c.Param("name"),
-		IATA:       c.Param("iata"),
-		ICAO:       c.Param("icao"),
-		City:       c.Param("city"),
-		Country:    c.Param("country"),
-		CreatedAt:  time.Now(),
-		ModifiedAt: time.Now(),
+		Name:    c.Param("name"),
+		IATA:    c.Param("iata"),
+		ICAO:    c.Param("icao"),
+		City:    c.Param("city"),
+		Country: c.Param("country"),
 	}
 
 	entity := entity.Airport(*airportEntity)
@@ -132,12 +130,11 @@ func (h *airportHandler) Update(c *gin.Context) {
 	}
 
 	var airportEntity = &entity.Airport{
-		Name:       c.Param("name"),
-		IATA:       c.Param("iata"),
-		ICAO:       c.Param("icao"),
-		City:       c.Param("city"),
-		Country:    c.Param("country"),
-		ModifiedAt: time.Now(),
+		Name:    c.Param("name"),
+		IATA:    c.Param("iata"),
+		ICAO:    c.Param("icao"),
+		City:    c.Param("city"),
+		Country: c.Param("country"),
 	}
 
 	entity := entity.Airport(*airportEntity)

@@ -1,13 +1,13 @@
 package entity
 
-import "time"
-
 type Airport struct {
-	Name       string    `bson:"name" json:"name"`
-	IATA       string    `bson:"iata" json:"iata"`
-	ICAO       string    `bson:"icao" json:"icao"`
-	City       string    `bson:"city" json:"city"`
-	Country    string    `bson:"country" json:"country"`
-	CreatedAt  time.Time `bson:"created_at" json:"created_at"`
-	ModifiedAt time.Time `bson:"modified_at" json:"modified_at"`
+	Id        int     `bson:"id" json:"id"`
+	Name      string  `bson:"name" json:"name"`
+	City      string  `bson:"city" json:"city"`
+	Country   string  `bson:"country" json:"country"`
+	IATA      string  `bson:"iata" json:"iata"`
+	ICAO      string  `bson:"icao" json:"icao"`
+	Longitude float64 `bson:"longitude" json:"longitude"`
+	Latitude  float64 `bson:"latitude" json:"latitude"`
+	Altitude  int     `bson:"altitude" json:"altitude"`
 }

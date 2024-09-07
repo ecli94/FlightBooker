@@ -1,13 +1,13 @@
 package model
 
-import "time"
-
 type Airport struct {
-	Name       string    `json:"name"`
-	IATA       string    `json:"iata"`
-	ICAO       string    `json:"icao"`
-	City       string    `json:"city"`
-	Country    string    `json:"country"`
-	CreatedAt  time.Time `json:"created_at"`
-	ModifiedAt time.Time `json:"modified_at"`
+	Id        int     `json:"id"`
+	Name      string  `json:"name"`
+	City      string  `json:"city"`
+	Country   string  `json:"country"`
+	IATA      string  `json:"iata"`
+	ICAO      string  `json:"icao"`
+	Longitude float64 `json:"longitude"`
+	Latitude  float64 `json:"latitude"`
+	Altitude  int     `json:"altitude"`
 }

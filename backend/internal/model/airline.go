@@ -1,11 +1,11 @@
 package model
 
-import "time"
-
 type Airline struct {
-	Name       string    `json:"name"`
-	IATA       string    `json:"iata"`
-	ICAO       string    `json:"icao"`
-	CreatedAt  time.Time `json:"created_at"`
-	ModifiedAt time.Time `json:"modified_at"`
+	Id       int    `json:"id"`
+	Name     string `json:"name"`
+	Alias    string `json:"alias"`
+	IATA     string `json:"iata"`
+	ICAO     string `json:"icao"`
+	Callsign string `json:"callsign"`
+	Country  string `json:"country"`
 }
