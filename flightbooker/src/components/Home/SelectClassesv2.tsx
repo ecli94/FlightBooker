@@ -7,25 +7,29 @@ interface SelectedClassesProps {
 const SelectedClasses = (props: SelectedClassesProps) => {
     const { ticketClasses } = useContextHandler();
     return (
-        <form>
+        <div className={styles.classCardContentContainer}>
             {ticketClasses.map((t) => (
                 <div
                     onClick={() => props.onChangeCallback('COMPLETE', t.id)}
                     key={t.id}
-                    className={styles.checkboxContainer}
+                    className={styles.classCardContent}
                     style={t.complete ? { backgroundColor: 'darkgray' } : {}}
                 >
-                    <span className={styles.checkboxLabel}>{t.name}</span>
-                    <span className={styles.checkboxBox}>
-                        <input
-                            type="checkbox"
-                            checked={t.complete}
-                            onChange={() => props.onChangeCallback('COMPLETE', t.id)}
-                        />
-                    </span>
+                    <div className={styles.classCardContentLabel}>
+                        <span>{t.name}</span>
+                    </div>
+                    <div className={styles.classCardContentBox}>
+                        <span>
+                            <input
+                                type="checkbox"
+                                checked={t.complete}
+                                onChange={() => props.onChangeCallback('COMPLETE', t.id)}
+                            />
+                        </span>
+                    </div>
                 </div>
             ))}
-        </form>
+        </div>
     );
 };
 

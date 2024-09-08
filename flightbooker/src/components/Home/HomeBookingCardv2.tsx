@@ -1,168 +1,96 @@
-import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/Homev2.module.css';
 import useContextHandler from '../../hooks/useHomeBookingCard';
-import logo from '../../assets/logo.jpg';
-import languageHome from '../../assets/languageHome.jpg';
-import loginHome from '../../assets/loginHome.jpg';
-import menuHome from '../../assets/menuHome.jpg';
-import bookHome from '../../assets/bookHome.jpg';
-import searchHome from '../../assets/searchHome.jpg';
-import bookPicHome from '../../assets/bookPicHome.jpg';
 import BookingButton from './BookingButtonv2';
-import TypeCard from './TypeCardv2';
-import DestinationFromCard from './DestinationFromCardv2';
-import DestinationToCard from './DestinationToCardv2';
-import PassengerCard from './PassengerCardv2';
-import useLanguageLocation from '../../hooks/useLanguageLocation';
+import fromToArrow from '../../assets/fromToArrow.svg';
 
-const HomeBookingCard: React.FC = () => {
-    const typeCardRef = useRef<HTMLDivElement | null>(null);
-    const fromCardRef = useRef<HTMLDivElement | null>(null);
-    const toCardRef = useRef<HTMLDivElement | null>(null);
-    const passengerCardRef = useRef<HTMLDivElement | null>(null);
+interface HomeBookingCardProps {
+    showCard: (cardType: 'type' | 'from' | 'to' | 'passengers') => void;
+    from?: string;
+    to?: string;
+    isOneWayPhaseTwo: () => boolean;
+    isRoundTripPhaseTwo: () => boolean;
+}
 
-    const [isTypeCardVisible, setIsTypeCardVisible] = useState(false);
-    const [isFromCardVisible, setIsFromCardVisible] = useState(false);
-    const [isToCardVisible, setIsToCardVisible] = useState(false);
-    const [isPassengerCardVisible, setIsPassengerCardVisible] = useState(false);
-    const [to, setTo] = useState<string | undefined>(undefined);
-    const [from, setFrom] = useState<string | undefined>(undefined);
-
+const HomeBookingCard: React.FC<HomeBookingCardProps> = (props) => {
     const { types, travelers, ticketClasses } = useContextHandler();
-    const language = localStorage.getItem('language');
-    const location = localStorage.getItem('location');
-
-    const showCard = (cardType: 'type' | 'from' | 'to' | 'passengers') => {
-        // Prevent click from propagating to the document
-        if (cardType == 'type') setIsTypeCardVisible(true);
-        if (cardType == 'from') setIsFromCardVisible(true);
-        if (cardType == 'to') setIsToCardVisible(true);
-        if (cardType == 'passengers') setIsPassengerCardVisible(true);
-    };
-
-    const isOneWayPhaseTwo = (): boolean => {
-        const oneWaySelected = types.find((x) => x.name == 'One way')?.complete;
-        return (oneWaySelected ?? false) && to !== undefined && from !== undefined;
-    };
-
-    useEffect(() => {
-        if (to === from) setTo(undefined);
-    }, [from]); //eslint-disable-line
-
-    useEffect(() => {
-        if (to === from) setFrom(undefined);
-    }, [to]); //eslint-disable-line
-
-    const closeTypeCard = () => {
-        setIsTypeCardVisible(false);
-    };
-
-    const closeFromCard = () => {
-        setIsFromCardVisible(false);
-    };
-
-    const closeToCard = () => {
-        setIsToCardVisible(false);
-    };
-
-    const closePassengerCard = () => {
-        setIsPassengerCardVisible(false);
-    };
 
     return (
-        <div className={styles.mainContainer}>
-            <div className={styles.bookContainer} style={{ backgroundImage: `url(${bookPicHome})` }}></div>
-
-            <div className={styles.headerContainer}>
-                <div className={styles.logo}>
-                    <img src={logo}></img>
+        <>
+            <div className={styles.bookTypeContainer}>
+                <div className={styles.bookTypeSpan}>
+                    <span>Trip type</span>
                 </div>
-                <div className={styles.locationLanguage}>
-                    <img src={languageHome}></img>
-                    <span>{location + '-' + language}</span>
-                </div>
-                <div className={styles.login}>
-                    <img src={loginHome}></img>
-                    <span>Login</span>
-                </div>
-            </div>
-            <div className={styles.menuContainer}>
-                <div className={styles.menu}>
-                    <img src={menuHome}></img>
-                    <span>Menu</span>
-                </div>
-                <div className={styles.book}>
-                    <img src={bookHome}></img>
-                    <span>Book</span>
-                </div>
-                <div className={styles.search}>
-                    <img src={searchHome}></img>
-                    <span>Search</span>
-                </div>
-            </div>
-        </div>
-    );
-    {
-        /* <div className={styles.centerColumn}>
-            <div className={styles.bookRow}>
-                {isTypeCardVisible && (
-                    <TypeCard closeCard={closeTypeCard} setIsTypeCardVisible={setIsTypeCardVisible} ref={typeCardRef} />
-                )}
-
-                {isFromCardVisible && (
-                    <DestinationFromCard
-                        closeCard={closeFromCard}
-                        to={to}
-                        from={from}
-                        setTo={setTo}
-                        setFrom={setFrom}
-                        ref={fromCardRef}
-                    />
-                )}
-
-                {isToCardVisible && (
-                    <DestinationToCard
-                        closeCard={closeToCard}
-                        to={to}
-                        from={from}
-                        setTo={setTo}
-                        setFrom={setFrom}
-                        ref={toCardRef}
-                    />
-                )}
-
-                {isPassengerCardVisible && <PassengerCard closeCard={closePassengerCard} ref={passengerCardRef} />}
-
-                <div className={styles.bookType}>
+                <div className={styles.bookTypeButton}>
                     <BookingButton
                         type="Trip type"
                         value={types.find((x) => x.complete == true)!.name ?? ''}
-                        onClick={() => showCard('type')}
+                        onClick={() => props.showCard('type')}
                     />
                 </div>
-                <div className={styles.bookFrom}>
-                    <BookingButton type="From" value={from ?? ''} onClick={() => showCard('from')} />
+            </div>
+
+            <div className={styles.bookFromToContainer}>
+                <div className={styles.bookFromSpan}>
+                    <span> From </span>
                 </div>
-                <div className={styles.bookTo}>
-                    <BookingButton type="To" value={to ?? ''} onClick={() => showCard('to')} />
+                <div className={styles.bookFromButton}>
+                    <BookingButton type="From" value={props.from ?? ''} onClick={() => props.showCard('from')} />
                 </div>
-                {isOneWayPhaseTwo() && (
-                    <div className={styles.bookPassengers}>
+                <div className={styles.bookToSpan}>
+                    <span> To </span>
+                </div>
+                <div className={styles.bookToButton}>
+                    <BookingButton type="To" value={props.to ?? ''} onClick={() => props.showCard('to')} />
+                </div>
+                <div className={styles.bookFromToArrow}>
+                    <img src={fromToArrow}></img>
+                </div>
+            </div>
+            {(props.isOneWayPhaseTwo() || props.isRoundTripPhaseTwo()) && (
+                <div className={styles.bookPassengerContainer}>
+                    <div className={styles.bookPassengerSpan}>
+                        <span>Passengers and class</span>
+                    </div>
+                    <div className={styles.bookPassengerButton}>
                         <BookingButton
                             type="Passengers and class"
                             value={`${travelers.reduce((sum, type) => sum + type.count!, 0).toString()}, ${ticketClasses.find((tc) => tc.complete == true)?.name}`}
-                            onClick={() => showCard('passengers')}
+                            onClick={() => props.showCard('passengers')}
                         />
                     </div>
-                )}
-                {isOneWayPhaseTwo() && (
-                    <div className={styles.bookDateOneWay}>
-                        <BookingButton type="Depart" value={to ?? ''} onClick={() => showCard('to')} />
+                </div>
+            )}
+
+            {props.isOneWayPhaseTwo() && (
+                <div className={styles.bookDepartReturnContainer}>
+                    <div className={styles.bookDepartOnlySpan}>
+                        <span> Depart </span>
                     </div>
-                )}
-            </div>
-        </div> */
-    }
+                    <div className={styles.bookDepartOnlyButton}>
+                        <BookingButton type="DepartOnly" value={props.to ?? ''} onClick={() => props.showCard('to')} />
+                    </div>
+                </div>
+            )}
+
+            {props.isRoundTripPhaseTwo() && (
+                <div className={styles.bookDepartReturnContainer}>
+                    <div className={styles.bookDepartSpan}>
+                        <span> Depart </span>
+                    </div>
+                    <div className={styles.bookDepartButton}>
+                        <BookingButton type="Depart" value={props.to ?? ''} onClick={() => props.showCard('to')} />
+                    </div>
+
+                    <div className={styles.bookReturnSpan}>
+                        <span> Return </span>
+                    </div>
+                    <div className={styles.bookReturnButton}>
+                        <BookingButton type="Return" value={props.to ?? ''} onClick={() => props.showCard('to')} />
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
 
 export default HomeBookingCard;

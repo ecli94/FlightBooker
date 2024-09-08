@@ -50,16 +50,15 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
 
     return (
         <>
-            <div className={styles.citySelectVerticalMenu}>
+            <div className={styles.cityCardContentContainer}>
                 <APILoader
                     // api key will be ommitted when pushed to github.
                     // must implement env variables and use that instead here
                     apiKey={import.meta.env.VITE_GOOGLE_API_KEY}
                     solutionChannel={'GMP_GCC_placepicker_to'}
                 />
-                <div>
+                <div className={styles.cityCardContentLabel}>
                     <PlacePicker
-                        className={styles.airportPicker}
                         country={countries}
                         type="airport"
                         itemType="city"

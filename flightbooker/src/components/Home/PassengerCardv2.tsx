@@ -14,20 +14,27 @@ const PassengerCard = forwardRef<HTMLDivElement, PassengerCardProps>((props, ref
         classDispatch({ type: ticketClass, id: id });
     };
     return (
-        <div className={styles.overlay} onClick={props.closeCard}>
-            <div ref={ref} id="passenger" className={styles.passengerCard} onClick={(e) => e.stopPropagation()}>
-                <div className={styles.passengerHeadingContainer}>
-                    <span className={styles.cardHeading}> Passengers and class</span>
-                    <button className={styles.passengerHeadingCloseButton} onClick={props.closeCard}>
-                        {' '}
-                        X{' '}
-                    </button>
+        <div className={styles.overlayContainer} onClick={props.closeCard}>
+            <div
+                ref={ref}
+                id="passenger"
+                className={styles.passengerCardContainer}
+                onClick={(e) => e.stopPropagation()}
+            >
+                <div className={styles.passengerCardHeader}>
+                    <div className={styles.passengerCardTitle}>
+                        <span className={styles.cardHeading}> Passengers and class</span>
+                    </div>
+                    <div className={styles.passengerCardCloseButton}>
+                        <button className={styles.passengerHeadingCloseButton} onClick={props.closeCard}>
+                            {' '}
+                            X{' '}
+                        </button>
+                    </div>
                 </div>
                 <SelectPassengers />
-                <div style={{ marginTop: '15px' }}>
-                    <SelectedClasses onChangeCallback={onChangeClass} />
-                </div>
-                <div className={styles.passengerDoneButton}>
+                <SelectedClasses onChangeCallback={onChangeClass} />
+                <div className={styles.passengerCardContentDone}>
                     <button onClick={props.closeCard}> Done </button>
                 </div>
             </div>

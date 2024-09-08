@@ -282,7 +282,7 @@
 /* Add a card effect for articles */
 .passengerCard {
     text-align: left;
-    background-color: grey;
+    background-color: black;
     border-radius: 25px;
     position: relative;
     left: calc((1090px-800px) / 2);
@@ -292,13 +292,11 @@
 }
 
 .passengerCard label {
-    background-color: #eee; /* Grey background color */
-    color: black; /* Black text color */
     display: block; /* Make the links appear below each other */
     padding: 12px; /* Add some padding */
     text-decoration: none; /* Remove underline from links */
     border-radius: 25px;
-    background-color: grey;
+    background-color: black;
 }
 
 .typeCard {
@@ -324,7 +322,7 @@
 
 .cityCard {
     text-align: left;
-    background-color: grey;
+    background-color: black;
     border-radius: 25px;
     position: relative;
     left: calc((1090px-800px) / 2);
@@ -378,7 +376,7 @@
 }
 
 .passengerHeadingCloseButton:hover {
-    background-color: black;
+    background-color: darkgrey;
     cursor: pointer;
 }
 

@@ -12,41 +12,42 @@ const SelectPassengers: React.FC = () => {
     };
     return (
         <>
-            <div className={styles.passengerSelectVerticalMenu}>
+            <div className={styles.passengerCardContentContainer}>
                 {travelers.map((t, index) => (
-                    <div key={index} className={styles.passengerRow}>
-                        <div className={styles.passengerColumn}>
-                            <div>
-                                <span>{t.type}</span>
-                            </div>
-                            <div>
-                                <span>{t.description}</span>
-                            </div>
+                    <div key={index} className={styles.passengerCardContent}>
+                        <div className={styles.passengerCardContentLabel}>
+                            <span>{t.type}</span>
+                        </div>
+                        <div className={styles.passengerCardContentLabelDescription}>
+                            <span>{t.description}</span>
                         </div>
 
-                        <div className={styles.removePassengerColumn}>
-                            <button
-                                className={
-                                    disableRemove(t) ? styles.removePassengerButton : styles.removePassengerButtonActive
-                                }
-                                disabled={disableRemove(t)}
-                                onClick={() => passengerDispatch({ type: 'REMOVE-PASSENGER', id: t.id })}
-                            >
-                                <span style={{ fontSize: '24px' }}>-</span>
-                            </button>
-                        </div>
-                        <div className={styles.passengerCountColumn}>
-                            <label className={styles.countPassengerLabel}>
+                        <div className={styles.passengerCardContentButtonsContainer}>
+                            <div className={styles.passengerCardContentRemoveButton}>
+                                <button
+                                    className={
+                                        disableRemove(t)
+                                            ? styles.removePassengerButton
+                                            : styles.removePassengerButtonActive
+                                    }
+                                    disabled={disableRemove(t)}
+                                    onClick={() => passengerDispatch({ type: 'REMOVE-PASSENGER', id: t.id })}
+                                >
+                                    <span>-</span>
+                                </button>
+                            </div>
+
+                            <div className={styles.passengerCardContentCountLabel}>
                                 <span>{t.count}</span>
-                            </label>
-                        </div>
-                        <div className={styles.addPassengerColumn}>
-                            <button
-                                className={styles.addPassengerButton}
-                                onClick={() => passengerDispatch({ type: 'ADD-PASSENGER', id: t.id })}
-                            >
-                                <span style={{ fontSize: '24px' }}>+</span>
-                            </button>
+                            </div>
+                            <div className={styles.passengerCardContentAddButton}>
+                                <button
+                                    className={styles.addPassengerButton}
+                                    onClick={() => passengerDispatch({ type: 'ADD-PASSENGER', id: t.id })}
+                                >
+                                    <span>+</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}
