@@ -16,9 +16,15 @@
 
 .logo {
     grid-column: 1/3;
+    grid-row: 1/2;
     justify-self: start;
     align-self: center;
-    margin-left: 50px;
+    margin-left: 20px;
+}
+
+.logo img {
+    width: 259px;
+    height: 58px;
 }
 
 .autocompleteContainer {

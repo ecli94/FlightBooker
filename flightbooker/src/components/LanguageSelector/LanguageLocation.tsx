@@ -2,7 +2,7 @@ import { useState } from 'react';
 import LocationAutocomplete from './LocationAutocomplete';
 import styles from './LanguageLocation.module.css';
 import LanguageAutocomplete from './LanguageAutocomplete';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/logoDarkMode.jpg';
 import languagePic from '../../assets/languagePic.jpg';
 
 const LanguageLocation = () => {
