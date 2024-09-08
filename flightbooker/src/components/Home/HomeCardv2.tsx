@@ -18,8 +18,7 @@ import DestinationToCard from './DestinationToCardv2';
 import PassengerCard from './PassengerCardv2';
 
 const HomeCard: React.FC = () => {
-    const [isBookingVisible, setIsBookingVisible] = useState(true);
-    setIsBookingVisible(true);
+    // const [isBookingVisible, setIsBookingVisible] = useState(true);
     const language = localStorage.getItem('language');
     const location = localStorage.getItem('location');
 
@@ -122,7 +121,7 @@ const HomeCard: React.FC = () => {
             <div className={styles.mainContainer}>
                 <div className={styles.heroBannerContainer} style={{ backgroundImage: `url(${bookPicHome})` }}>
                     <div className={styles.bookCardContainer}>
-                        {isBookingVisible && (
+                        {
                             <HomeBookingCard
                                 showCard={showCard}
                                 from={from}
@@ -130,7 +129,7 @@ const HomeCard: React.FC = () => {
                                 isOneWayPhaseTwo={isOneWayPhaseTwo}
                                 isRoundTripPhaseTwo={isRoundTripPhaseTwo}
                             />
-                        )}
+                        }
                     </div>
                 </div>
                 <div className={styles.headerContainer}>
