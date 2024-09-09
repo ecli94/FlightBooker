@@ -44,7 +44,9 @@ const LocationAutocomplete = (props: LocationAutocompleteProps) => {
     }, [input, props.show]);
 
     useEffect(() => {
-        setInput(location?.description ?? '');
+        if (!props.show) {
+            setInput(location?.description ?? '');
+        }
     }, [props.show, location?.description]);
 
     const onLocationSelect = (value?: google.maps.places.AutocompletePrediction) => {
@@ -62,7 +64,11 @@ const LocationAutocomplete = (props: LocationAutocompleteProps) => {
                 <input
                     type="text"
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    autoFocus
+                    onChange={(e) => {
+                        setInput(e.target.value);
+                        props.showLocationsCallback();
+                    }}
                     placeholder="Search your country"
                     onClick={(e) => {
                         props.showLocationsCallback();

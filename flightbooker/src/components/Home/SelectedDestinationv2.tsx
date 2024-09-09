@@ -57,7 +57,9 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
     }, [input, props.show]);
 
     useEffect(() => {
-        setInput(location?.description ?? '');
+        if (!props.show) {
+            setInput(location?.description ?? '');
+        }
     }, [props.show, location?.description]);
 
     const onLocationSelect = (value?: google.maps.places.AutocompletePrediction) => {
@@ -119,6 +121,7 @@ const SelectDestination: React.FC<SelectDestinationProps> = (props) => {
                         value={input}
                         autoFocus
                         onChange={(e) => {
+                            props.showLocationsCallback();
                             setInput(e.target.value);
                         }}
                         placeholder="Search your city"
