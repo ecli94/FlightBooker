@@ -137,7 +137,6 @@
     justify-self: start;
     align-self: center;
     display: flex;
-    margin-left: 65px;
 }
 
 .search img {
@@ -178,38 +177,38 @@
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
     grid-column: 2/5;
-    grid-row: 2/4;
+    grid-row: 2/3;
 }
 
 .bookTypeSpan {
+    justify-content: start;
     display: flex;
     grid-column: 1/4;
     grid-row: 1/2;
-    align-self: end;
+    margin-bottom: 2.2rem;
 }
 .bookTypeSpan span {
-    justify-content: start;
     text-align: start;
+    margin-bottom: 2.2rem;
     width: 100%;
     font-size: 24px;
 }
 
 .bookTypeButton {
     display: flex;
+    align-items: flex-end;
     grid-column: 1/4;
-    grid-row: 2/3;
-    align-self: start;
+    grid-row: 1/2;
 }
 
 .bookTypeButton button {
-    justyify-content: start;
     text-align: start;
     width: 100%;
     font-size: 24px;
     height: 56px;
     border-radius: 15px;
-    background-color: white;
     border: 0px;
+    background-color: white;
     transition:
         background-color 0.3s ease,
         border-color 0.3s ease;
@@ -225,28 +224,28 @@
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
     grid-column: 6/9;
-    grid-row: 2/4;
+    grid-row: 2/3;
 }
 
 .bookFromSpan {
     display: flex;
     grid-column: 1/3;
     grid-row: 1/2;
-    align-self: end;
     margin-right: 25%;
+    margin-bottom: 2.2rem;
 }
 .bookFromSpan span {
-    justify-content: start;
     text-align: start;
     width: 100%;
     font-size: 24px;
+    margin-bottom: 2.2rem;
 }
 
 .bookFromButton {
     display: flex;
     grid-column: 1/3;
     grid-row: 2/3;
-    align-self: start;
+    align-self: end;
     margin-right: 25%;
 }
 
@@ -271,29 +270,29 @@
 
 .bookToSpan {
     display: flex;
+    align-items: start;
     grid-column: 2/4;
     grid-row: 1/2;
-    align-self: end;
     margin-left: 25%;
+    margin-bottom: 2.2rem;
 }
 .bookToSpan span {
-    justify-content: start;
     text-align: start;
     width: 100%;
     font-size: 24px;
+    margin-bottom: 2.2rem;
 }
 
 .bookToButton {
     display: flex;
+    align-items: end;
     grid-column: 2/4;
-    grid-row: 2/3;
-    align-self: start;
+    grid-row: 1/2;
     margin-left: 25%;
 }
 
 .bookToButton button {
-    justyify-content: start;
-    text-align: center;
+    text-align: end;
     width: 100%;
     font-size: 24px;
     height: 56px;
@@ -315,6 +314,7 @@
     grid-row: 2/3;
     display: flex;
     justify-content: center;
+    align-items: end;
 }
 
 .bookFromToArrow img {
@@ -380,12 +380,14 @@
     display: flex;
     grid-column: 1/4;
     grid-row: 1/2;
+    margin-bottom: 2.2rem;
 }
 .bookDepartOnlySpan span {
     align-self: start;
     text-align: start;
     width: 100%;
     font-size: 24px;
+    margin-bottom: 2.2rem;
 }
 
 .bookDepartOnlyButton {
@@ -418,12 +420,14 @@
     grid-column: 1/3;
     grid-row: 1/2;
     margin-right: 25%;
+    margin-bottom: 2.2rem;
 }
 .bookDepartSpan span {
     align-self: start;
     text-align: start;
     width: 100%;
     font-size: 24px;
+    margin-bottom: 2.2rem;
 }
 
 .bookDepartButton {
@@ -457,12 +461,14 @@
     grid-column: 2/4;
     grid-row: 1/2;
     margin-left: 25%;
+    margin-bottom: 2.2rem;
 }
 .bookReturnSpan span {
     align-self: flex-start;
     text-align: start;
     width: 100%;
     font-size: 24px;
+    margin-bottom: 2.2rem;
 }
 
 .bookReturnButton {
@@ -547,7 +553,6 @@
     justify-self: start;
     align-self: center;
     display: flex;
-    margin-left: 5px;
 }
 
 .statusCheck img {
@@ -1014,4 +1019,214 @@
     width: 25px;
     height: 25px;
     border-radius: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+    .mainContainer {
+        grid-template-columns: repeat(15, 1fr);
+        grid-template-rows: repeat(15, 1fr);
+    }
+    .bookCardContainer {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        grid-row: 2/12;
+        grid-column: 3/14;
+    }
+    .bookTypeContainer {
+        grid-column: 2/11;
+        grid-row: 1/2;
+    }
+    .bookTypeSpan {
+        grid-column: 1/10;
+        grid-row: 1/2;
+    }
+
+    .bookTypeButton {
+        grid-column: 1/10;
+        grid-row: 1/2;
+    }
+
+    .bookFromToContainer {
+        grid-column: 2/11;
+        grid-row: 2/4;
+    }
+
+    .bookFromSpan {
+        grid-column: 1/10;
+        grid-row: 1/2;
+        margin-right: 0%;
+    }
+
+    .bookFromButton {
+        grid-column: 1/10;
+        grid-row: 1/2;
+        margin-right: 0%;
+    }
+
+    .bookFromButton button {
+        border-radius: 15px;
+    }
+
+    .bookToSpan {
+        grid-column: 1/10;
+        grid-row: 2/3;
+        margin-left: 0%;
+    }
+
+    .bookToButton {
+        grid-column: 1/10;
+        grid-row: 2/3;
+        margin-left: 0%;
+    }
+
+    .bookToButton button {
+        text-align: start;
+        border-radius: 15px;
+    }
+
+    .bookFromToArrow {
+        display: none;
+    }
+
+    .bookPassengerContainer {
+        grid-column: 2/11;
+        grid-row: 4/5;
+    }
+
+    .bookPassengerSpan {
+        grid-column: 1/10;
+        grid-row: 1/2;
+    }
+
+    .bookPassengerButton {
+        grid-column: 1/10;
+        grid-row: 1/2;
+    }
+
+    .bookDepartReturnContainer {
+        grid-column: 2/11;
+        grid-row: 5/7;
+    }
+
+    .bookDepartOnlySpan {
+        grid-column: 1/10;
+        grid-row: 1/2;
+    }
+
+    .bookDepartOnlyButton {
+        grid-column: 1/10;
+        grid-row: 1/2;
+    }
+
+    .heroBannerContainer {
+        grid-column: 1/16;
+        grid-row: 4/16;
+    }
+
+    .bookDepartSpan {
+        grid-column: 1/10;
+        grid-row: 1/2;
+        margin-right: 0%;
+    }
+
+    .bookDepartButton {
+        grid-column: 1/10;
+        grid-row: 1/2;
+        margin-right: 0%;
+    }
+
+    .bookDepartButton button {
+        align-self: flex-end;
+        text-align: start;
+        border-radius: 15px;
+    }
+
+    .bookReturnSpan {
+        grid-column: 1/10;
+        grid-row: 2/3;
+        margin-left: 0%;
+    }
+
+    .bookReturnButton {
+        grid-column: 1/10;
+        grid-row: 2/3;
+        margin-left: 0%;
+    }
+
+    .bookReturnButton button {
+        text-align: start;
+        border-radius: 15px;
+    }
+
+    .menuContainer {
+        grid-column: 1/16;
+        grid-row: 4/5;
+    }
+
+    .menu {
+        grid-column: 1/3;
+        grid-row: 1/2;
+        margin: 0px;
+    }
+
+    .book {
+        grid-column: 7/10;
+        grid-row: 1/2;
+    }
+
+    .search {
+        grid-column: 10/16;
+        grid-row: 1/2;
+        margin: 0px;
+        justify-self: end;
+    }
+
+    .headerContainer {
+        grid-column: 1/16;
+        grid-row: 1/4;
+    }
+
+    .logo {
+        grid-column: 1/16;
+        grid-row: 1/2;
+        margin-left: 0px;
+        justify-self: center;
+    }
+
+    .locationLanguage {
+        grid-column: 1/8;
+        grid-row: 2/3;
+        margin-left: 0px;
+    }
+
+    .login {
+        grid-column: 8/16;
+        grid-row: 2/3;
+        margin-left: 0px;
+        justify-self: end;
+    }
+
+    .lowerMenuContainer {
+        grid-column: 1/16;
+        grid-row: 15/16;
+    }
+
+    .manage {
+        grid-column: 1/5;
+        justify-self: start;
+        grid-row: 1/2;
+        margin-left: 0px;
+    }
+
+    .checkIn {
+        grid-column: 5/10;
+        grid-row: 1/2;
+        justify-self: center;
+    }
+
+    .statusCheck {
+        grid-column: 10/16;
+        grid-row: 1/2;
+        justify-self: end;
+    }
 }

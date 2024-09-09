@@ -173,33 +173,6 @@ const HomeCard: React.FC = () => {
                         <span>Status check</span>
                     </div>
                 </div>
-                {/* {isTypeCardVisible && (
-                    <TypeCard closeCard={closeTypeCard} setIsTypeCardVisible={setIsTypeCardVisible} ref={typeCardRef} />
-                )}
-
-                {isFromCardVisible && (
-                    <DestinationFromCard
-                        closeCard={closeFromCard}
-                        to={to}
-                        from={from}
-                        setTo={setTo}
-                        setFrom={setFrom}
-                        ref={fromCardRef}
-                    />
-                )}
-
-                {isToCardVisible && (
-                    <DestinationToCard
-                        closeCard={closeToCard}
-                        to={to}
-                        from={from}
-                        setTo={setTo}
-                        setFrom={setFrom}
-                        ref={toCardRef}
-                    />
-                )}
-
-                {isPassengerCardVisible && <PassengerCard closeCard={closePassengerCard} ref={passengerCardRef} />} */}
             </div>
         </>
     );
