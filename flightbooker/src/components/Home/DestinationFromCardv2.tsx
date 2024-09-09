@@ -1,6 +1,6 @@
 import SelectDestination from './SelectedDestinationv2';
 import styles from '../../styles/Homev2.module.css';
-import { Dispatch, forwardRef, SetStateAction } from 'react';
+import { Dispatch, forwardRef, SetStateAction, useState } from 'react';
 
 interface DestinationFromCardProps {
     closeCard: () => void;
@@ -12,9 +12,24 @@ interface DestinationFromCardProps {
 
 const DestinationFromCard = forwardRef<HTMLDivElement, DestinationFromCardProps>((props, ref) => {
     const direction = 'Departure locations';
+    const [showLocations, setShowLocations] = useState(false);
+    const toggleLocationsOn = () => {
+        setShowLocations(true);
+    };
+    const toggleLocationsOff = () => {
+        setShowLocations(false);
+    };
     return (
         <div className={styles.overlayContainer} onClick={props.closeCard}>
-            <div ref={ref} id="from" className={styles.cityCardContainer} onClick={(e) => e.stopPropagation()}>
+            <div
+                ref={ref}
+                id="from"
+                className={styles.cityCardContainer}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    toggleLocationsOff();
+                }}
+            >
                 <div className={styles.cityCardHeader}>
                     <div className={styles.cityCardTitle}>
                         <span> {direction} </span>
@@ -24,6 +39,9 @@ const DestinationFromCard = forwardRef<HTMLDivElement, DestinationFromCardProps>
                     </div>
                 </div>
                 <SelectDestination
+                    show={showLocations}
+                    showLocationsCallback={toggleLocationsOn}
+                    hideLocationsCallback={toggleLocationsOff}
                     closeCallback={props.closeCard}
                     direction={direction}
                     to={props.to}
