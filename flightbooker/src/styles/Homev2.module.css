@@ -102,6 +102,11 @@
     margin-left: 20px;
 }
 
+.menu:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
 .menu img {
     height: 40px;
 }
@@ -118,6 +123,11 @@
     justify-self: start;
     align-self: center;
     display: flex;
+}
+
+.book:hover {
+    background-color: grey;
+    cursor: pointer;
 }
 
 .book img {
@@ -137,6 +147,11 @@
     justify-self: start;
     align-self: center;
     display: flex;
+}
+
+.search:hover {
+    background-color: grey;
+    cursor: pointer;
 }
 
 .search img {
