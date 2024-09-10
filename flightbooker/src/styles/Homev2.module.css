@@ -590,6 +590,7 @@
     grid-column: 1/31;
     grid-row: 1/16;
 }
+
 .typeCardContainer {
     display: grid;
     grid-template-columns: subgrid;
@@ -611,26 +612,29 @@
 .typeCardTitle {
     display: flex;
     justify-content: start;
-    grid-column: 1/5;
+    align-items: start;
+    grid-column: 2/16;
     grid-row: 1/2;
 }
 
 .typeCardTitle span {
-    align-self: center;
+    text-align: start;
     width: 100%;
     font-size: 30px;
 }
 
 .typeCardCloseButton {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     grid-column: 16/18;
     grid-row: 1/2;
+    margin-right: 0.5rem;
 }
 
 .typeCardCloseButton button {
     align-self: center;
-    width: 50%;
+    width: 32px;
+    height: 32px;
     border-radius: 25px;
     border: 0px;
     background-color: grey;
@@ -667,8 +671,8 @@
 
 .typeCardContentLabel {
     display: flex;
-    justify-content: center;
-    grid-column: 1/5;
+    justify-content: start;
+    grid-column: 2/16;
 }
 
 .typeCardContentLabel span {
@@ -677,12 +681,18 @@
 
 .typeCardContentBox {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     grid-column: 16/18;
+    margin-right: 0.5rem;
+}
+
+.typeCardContentBox input[type='checkbox'] {
+    width: 32px;
+    height: 32px;
 }
 
 .typeCardContentBox span {
-    font-size: 24px;
+    font-size: 32px;
 }
 
 .typeCardContentDone {
@@ -730,7 +740,7 @@
     display: flex;
     align-items: start;
     justify-content: start;
-    grid-column: 2/8;
+    grid-column: 2/14;
     grid-row: 1/2;
 }
 
@@ -740,14 +750,16 @@
 
 .cityCardCloseButton {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     grid-column: 14/16;
     grid-row: 1/2;
+    margin-right: 0.5rem;
 }
 
 .cityCardCloseButton button {
     align-self: center;
-    width: 50%;
+    width: 32px;
+    height: 32px;
     border-radius: 25px;
     border: 0px;
     background-color: grey;
@@ -836,24 +848,28 @@
     display: flex;
     justify-content: start;
     align-items: start;
-    grid-column: 2/8;
+    grid-column: 2/16;
     grid-row: 1/2;
 }
 
 .passengerCardTitle span {
+    text-align: start;
+    width: 100%;
     font-size: 30px;
 }
 
 .passengerCardCloseButton {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     grid-column: 16/18;
     grid-row: 1/2;
+    margin-right: 0.5rem;
 }
 
 .passengerCardCloseButton button {
     align-self: center;
-    width: 50%;
+    width: 32px;
+    height: 32px;
     border-radius: 25px;
     border: 0px;
     background-color: grey;
@@ -887,14 +903,15 @@
     display: flex;
     align-items: start;
     justify-content: start;
-    grid-column: 2/8;
+    grid-column: 2/12;
+    margin-bottom: 1.5rem;
 }
 
 .passengerCardContentLabelDescription {
     display: flex;
     justify-content: start;
     align-items: end;
-    grid-column: 2/8;
+    grid-column: 2/12;
 }
 
 .passengerCardContentLabel span {
@@ -917,7 +934,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-column: 1/3;
+    grid-column: 1/4;
 }
 
 .passengerCardContentCountLabel {
@@ -927,11 +944,16 @@
     grid-column: 3/5;
 }
 
+.passengerCardContentCountLabel span {
+    width: 100%;
+    text-align: center;
+}
+
 .passengerCardContentAddButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-column: 5/7;
+    grid-column: 4/7;
 }
 
 .passengerCardContentDone {
@@ -959,14 +981,16 @@
 
 .removePassengerButton {
     width: 50px;
-    height: 100%;
+    height: 50px;
+    font-size: 32px;
     border-radius: 25px;
     border: 0.5px solid white;
 }
 
 .removePassengerButtonActive {
     width: 50px;
-    height: 100%;
+    height: 50px;
+    font-size: 32px;
     border-radius: 25px;
     border: 0.5px solid white;
 }
@@ -978,7 +1002,8 @@
 
 .addPassengerButton {
     width: 50px;
-    height: 100%;
+    height: 50px;
+    font-size: 32px;
     border-radius: 25px;
     border: 0.5px solid white;
 }
@@ -1013,7 +1038,7 @@
 .classCardContentLabel {
     display: flex;
     justify-content: start;
-    grid-column: 2/8;
+    grid-column: 2/16;
 }
 
 .classCardContentLabel span {
@@ -1027,13 +1052,12 @@
 }
 
 .classCardContentBox span {
-    font-size: 24px;
+    font-size: 32px;
 }
 
 .classCardContentBox input[type='checkbox'] {
-    width: 25px;
-    height: 25px;
-    border-radius: 15px;
+    width: 32px;
+    height: 32px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -1243,5 +1267,169 @@
         grid-column: 10/16;
         grid-row: 1/2;
         justify-self: end;
+    }
+
+    .passengerCardContainer {
+        grid-column: 1/31;
+        border-radius: 0px;
+        grid-row: 1/16;
+    }
+
+    .passengerCardHeader {
+        grid-column: 1/31;
+        grid-row: 1/2;
+    }
+
+    .passengerCardTitle {
+        grid-column: 2/20;
+        grid-row: 1/2;
+    }
+
+    .passengerCardCloseButton {
+        grid-column: 20/30;
+        grid-row: 1/2;
+        margin-right: 2rem;
+    }
+
+    .passengerCardContentContainer {
+        grid-column: 1/31;
+        grid-row: 2/6;
+    }
+
+    .passengerCardContent {
+        grid-column: 1/31;
+    }
+
+    .passengerCardContentLabel {
+        grid-column: 2/16;
+    }
+
+    .passengerCardContentLabelDescription {
+        grid-column: 2/16;
+    }
+
+    .passengerCardContentButtonsContainer {
+        grid-column: 16/30;
+    }
+
+    .passengerCardContentRemoveButton {
+        grid-column: 1/7;
+    }
+
+    .passengerCardContentCountLabel {
+        grid-column: 6/8;
+    }
+
+    .passengerCardContentAddButton {
+        grid-column: 7/14;
+    }
+
+    .passengerCardContentDone {
+        grid-column: 10/20;
+        grid-row: 13/14;
+    }
+
+    .classCardContentContainer {
+        grid-column: 1/31;
+        grid-row: 8/11;
+    }
+
+    .classCardContent {
+        grid-column: 1/31;
+    }
+
+    .classCardContentLabel {
+        grid-column: 2/16;
+    }
+
+    .classCardContentBox {
+        grid-column: 16/30;
+        justify-content: end;
+        margin-right: 2.5rem;
+    }
+
+    .typeCardContainer {
+        border-radius: 0px;
+        grid-column: 1/31;
+        grid-row: 1/16;
+    }
+
+    .typeCardHeader {
+        grid-column: 1/31;
+        grid-row: 1/2;
+    }
+
+    .typeCardTitle {
+        grid-column: 2/20;
+        grid-row: 1/2;
+    }
+
+    .typeCardCloseButton {
+        grid-column: 20/30;
+        grid-row: 1/2;
+        margin-right: 2rem;
+    }
+
+    .typeCardContentContainer {
+        grid-column: 1/31;
+        grid-row: 3/6;
+    }
+
+    .typeCardContent {
+        grid-column: 1/31;
+    }
+
+    .typeCardContentLabel {
+        grid-column: 2/16;
+    }
+
+    .typeCardContentLabel span {
+        font-size: 24px;
+    }
+
+    .typeCardContentBox {
+        grid-column: 16/30;
+        margin-right: 2.5rem;
+    }
+
+    .typeCardContentDone {
+        grid-column: 10/20;
+        grid-row: 9/10;
+    }
+
+    .cityCardContainer {
+        grid-column: 1/31;
+        grid-row: 1/16;
+    }
+
+    .cityCardHeader {
+        grid-column: 1/31;
+        grid-row: 1/2;
+    }
+
+    .cityCardTitle {
+        grid-column: 2/20;
+        grid-row: 1/2;
+    }
+
+    .cityCardCloseButton {
+        grid-column: 20/30;
+        grid-row: 1/2;
+        margin-right: 2rem;
+    }
+
+    .cityCardContentContainer {
+        grid-column: 1/31;
+        grid-row: 2/5;
+    }
+
+    .cityCardContent {
+        grid-column: 2/28;
+        grid-row: 1/4;
+    }
+
+    .cityCardContentDone {
+        grid-column: 10/20;
+        grid-row: 9/10;
     }
 }
