@@ -3,9 +3,9 @@ import styles from '../../styles/Homev2.module.css';
 import logo from '../../assets/logoDarkMode.jpg';
 import languageHome from '../../assets/languageHome.jpg';
 import loginHome from '../../assets/loginHome.jpg';
-import menuHome from '../../assets/menuHome.jpg';
-import bookHome from '../../assets/bookHome.jpg';
-import searchHome from '../../assets/searchHome.jpg';
+import menuHome from '../../assets/menuHome.svg';
+import bookHome from '../../assets/bookHome.svg';
+import searchHome from '../../assets/searchHome.svg';
 import bookPicHome from '../../assets/bookPicHome.jpg';
 import manageHome from '../../assets/manageHome.svg';
 import checkInHome from '../../assets/checkInHome.svg';
@@ -18,7 +18,9 @@ import DestinationToCard from './DestinationToCardv2';
 import PassengerCard from './PassengerCardv2';
 
 const HomeCard: React.FC = () => {
-    // const [isBookingVisible, setIsBookingVisible] = useState(true);
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [isBookingVisible, setIsBookingVisible] = useState(true);
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
     const language = localStorage.getItem('language');
     const location = localStorage.getItem('location');
 
@@ -78,6 +80,24 @@ const HomeCard: React.FC = () => {
         setIsPassengerCardVisible(false);
     };
 
+    const onMenu = () => {
+        setIsMenuVisible(true);
+        setIsBookingVisible(false);
+        setIsSearchVisible(false);
+    };
+
+    const onBook = () => {
+        setIsMenuVisible(false);
+        setIsBookingVisible(true);
+        setIsSearchVisible(false);
+    };
+
+    const onSearch = () => {
+        setIsMenuVisible(false);
+        setIsBookingVisible(false);
+        setIsSearchVisible(true);
+    };
+
     return (
         <>
             {isTypeCardVisible && (
@@ -120,8 +140,8 @@ const HomeCard: React.FC = () => {
 
             <div className={styles.mainContainer}>
                 <div className={styles.heroBannerContainer} style={{ backgroundImage: `url(${bookPicHome})` }}>
-                    <div className={styles.bookCardContainer}>
-                        {
+                    {isBookingVisible && (
+                        <div className={styles.bookCardContainer}>
                             <HomeBookingCard
                                 showCard={showCard}
                                 from={from}
@@ -129,8 +149,8 @@ const HomeCard: React.FC = () => {
                                 isOneWayPhaseTwo={isOneWayPhaseTwo}
                                 isRoundTripPhaseTwo={isRoundTripPhaseTwo}
                             />
-                        }
-                    </div>
+                        </div>
+                    )}
                 </div>
                 <div className={styles.headerContainer}>
                     <div className={styles.logo}>
@@ -146,15 +166,27 @@ const HomeCard: React.FC = () => {
                     </div>
                 </div>
                 <div className={styles.menuContainer}>
-                    <div className={styles.menu}>
+                    <div
+                        className={styles.menu}
+                        style={isMenuVisible ? { borderBottom: '0.25rem solid white' } : undefined}
+                        onClick={onMenu}
+                    >
                         <img src={menuHome}></img>
                         <span>Menu</span>
                     </div>
-                    <div className={styles.book}>
+                    <div
+                        className={styles.book}
+                        style={isBookingVisible ? { borderBottom: '0.25rem solid white' } : undefined}
+                        onClick={onBook}
+                    >
                         <img src={bookHome}></img>
                         <span>Book</span>
                     </div>
-                    <div className={styles.search}>
+                    <div
+                        className={styles.search}
+                        style={isSearchVisible ? { borderBottom: '0.25rem solid white' } : undefined}
+                        onClick={onSearch}
+                    >
                         <img src={searchHome}></img>
                         <span>Search</span>
                     </div>
