@@ -75,7 +75,7 @@
 
 .language {
     grid-column: 1/4;
-    grid-row: 5/6;
+    grid-row: 4/5;
     text-align: left;
 }
 
@@ -122,10 +122,30 @@
 
 .languagePic {
     grid-column: 1/9;
-    grid-row: 1/10;
+    grid-row: 2/9;
 }
 
 .languagePic img {
-    height: 95vh;
+    height: 100%;
     width: 100%;
+}
+
+.apply {
+    grid-column: 3/4;
+    grid-row: 6/7;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.apply button {
+    width: 100%;
+    height: 56px;
+    border-radius: 15px;
+    border: 0.5px solid grey;
+}
+
+.applyHover:hover {
+    border-color: white;
+    cursor: pointer;
 }

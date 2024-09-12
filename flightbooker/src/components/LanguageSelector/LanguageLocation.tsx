@@ -4,10 +4,16 @@ import styles from './LanguageLocation.module.css';
 import LanguageAutocomplete from './LanguageAutocomplete';
 import logo from '../../assets/logoDarkMode.jpg';
 import languagePic from '../../assets/languagePic.jpg';
+import useLanguageLocation from '../../hooks/useLanguageLocation';
 
-const LanguageLocation = () => {
+interface LanguageLocationProps {
+    onSelection: (language: string, location: string) => void;
+}
+const LanguageLocation = (props: LanguageLocationProps) => {
     const [showLocations, setShowLocations] = useState(false);
     const [showLanguages, setShowLanguages] = useState(false);
+
+    const { language, location } = useLanguageLocation();
 
     const toggleLocationsOn = () => {
         setShowLocations(true);
@@ -52,6 +58,15 @@ const LanguageLocation = () => {
                         showLanguagesCallback={toggleLanguagesOn}
                         hideLanguagesCallback={toggleLanguagesOff}
                     />
+                </div>
+                <div className={styles.apply}>
+                    <button
+                        disabled={!language || !location?.description}
+                        className={language && location?.description ? styles.applyHover : ''}
+                        onClick={() => props.onSelection(language ?? '', location?.description ?? '')}
+                    >
+                        Apply
+                    </button>
                 </div>
             </div>
             <div className={styles.languagePicContainer}>
