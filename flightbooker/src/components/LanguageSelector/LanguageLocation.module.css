@@ -51,21 +51,31 @@
     width: 96.7%;
     margin-top: 1.5rem;
     border-radius: 15px;
-    border: 0.5px solid white;
+    border: 0.5px solid grey;
     padding: 5px;
+}
+
+.location input:hover {
+    border-color: white; /* Light gray background on hover */
+    cursor: pointer;
 }
 
 .location select {
     font-size: 16px;
     width: 100%;
     border-radius: 15px;
-    border: 0.5px solid white;
+    border: 0.5px solid grey;
     padding: 5px;
+}
+
+.location option:hover {
+    background-color: grey; /* Light gray background on hover */
+    cursor: pointer;
 }
 
 .language {
     grid-column: 1/4;
-    grid-row: 5/6;
+    grid-row: 4/5;
     text-align: left;
 }
 
@@ -80,8 +90,13 @@
     width: 100%;
     margin-top: 1.5rem;
     border-radius: 15px;
-    border: 0.5px solid white;
+    border: 0.5px solid grey;
     padding: 5px;
+}
+
+.languageButtonHover:hover {
+    border-color: white; /* Light gray background on hover */
+    cursor: pointer;
 }
 
 .language select {
@@ -90,6 +105,11 @@
     border-radius: 15px;
     border: 0.5px solid white;
     padding: 5px;
+}
+
+.language option:hover {
+    background-color: grey;
+    cursor: pointer;
 }
 
 .languagePicContainer {
@@ -102,10 +122,30 @@
 
 .languagePic {
     grid-column: 1/9;
-    grid-row: 1/10;
+    grid-row: 2/9;
 }
 
 .languagePic img {
-    height: 95vh;
+    height: 100%;
     width: 100%;
+}
+
+.apply {
+    grid-column: 3/4;
+    grid-row: 6/7;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.apply button {
+    width: 100%;
+    height: 56px;
+    border-radius: 15px;
+    border: 0.5px solid grey;
+}
+
+.applyHover:hover {
+    border-color: white;
+    cursor: pointer;
 }
