@@ -1203,20 +1203,23 @@
     }
 
     .menu {
-        grid-column: 1/3;
+        grid-column: 1/6;
         grid-row: 1/2;
         margin: 0px;
+        margin-left: 1rem;
     }
 
     .book {
-        grid-column: 7/10;
+        grid-column: 6/11;
         grid-row: 1/2;
+        justify-self: center;
     }
 
     .search {
-        grid-column: 10/16;
+        grid-column: 11/16;
         grid-row: 1/2;
         margin: 0px;
+        margin-right: 1rem;
         justify-self: end;
     }
 
@@ -1251,22 +1254,23 @@
     }
 
     .manage {
-        grid-column: 1/5;
+        grid-column: 1/6;
         justify-self: start;
         grid-row: 1/2;
-        margin-left: 0px;
+        margin-left: 1rem;
     }
 
     .checkIn {
-        grid-column: 5/10;
+        grid-column: 6/11;
         grid-row: 1/2;
         justify-self: center;
     }
 
     .statusCheck {
-        grid-column: 10/16;
+        grid-column: 11/16;
         grid-row: 1/2;
         justify-self: end;
+        margin-right: 1rem;
     }
 
     .passengerCardContainer {
