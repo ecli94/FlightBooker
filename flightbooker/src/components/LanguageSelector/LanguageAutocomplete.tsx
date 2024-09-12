@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import GoogleMapsLoader from '../../services/GoogleMapsLoader';
 import useLanguageLocation from '../../hooks/useLanguageLocation';
+import styles from './LanguageLocation.module.css';
 
 interface LanguageAutocompleteProps {
     show: boolean;
@@ -42,6 +43,7 @@ const LanguageAutocomplete = (props: LanguageAutocompleteProps) => {
             <span>Language</span>
             <div>
                 <button
+                    className={location ? styles.languageButtonHover : ''}
                     disabled={location ? false : true}
                     onClick={(e) => {
                         props.showLanguagesCallback();
